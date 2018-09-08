@@ -12,3 +12,21 @@ services:
         parent: api.service.util.servico_base
         calls:
             - [setRepository, [UserBundle:User]]
+
+    api.service.client:
+        class: ApiRestBundle\Service\ClientService
+        parent: api.service.util.servico_base
+        calls:
+            - [setRepository, [AppBundle:Client]]
+
+    api.service.driver:
+        class: ApiRestBundle\Service\DriverService
+        parent: api.service.util.servico_base
+        calls:
+            - [setRepository, [AppBundle:Driver]]
+
+    api.service.category:
+        class: ApiRestBundle\Service\CategoryService
+        parent: api.service.util.servico_base
+        calls:
+            - [setRepository, [AppBundle:Category]]

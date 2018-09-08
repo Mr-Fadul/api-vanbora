@@ -2,3 +2,18 @@ api_rest_usuario:
     resource: "ApiRestBundle:User"
     type:     rest
     prefix:   /api/user
+
+api_rest_client:
+    resource: "ApiRestBundle:Client"
+    type:     rest
+    prefix:   /api/client
+
+api_rest_driver:
+    resource: "ApiRestBundle:Driver"
+    type:     rest
+    prefix:   /api/driver
+
+api_rest_category:
+    resource: "ApiRestBundle:Category"
+    type:     rest
+    prefix:   /api/category
