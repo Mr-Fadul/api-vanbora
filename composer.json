@@ -14,6 +14,7 @@
     },
     "require": {
         "php": ">=5.3.9",
+        "deployer/deployer": "^4.3",
         "doctrine/doctrine-bundle": "~1.4",
         "doctrine/orm": "^2.4.8",
         "e-moe/guzzle6-bundle": "^1.1",
