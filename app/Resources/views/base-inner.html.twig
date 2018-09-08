@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Vanbora - O seu app de carona</title>
+        <link rel="icon" type="image/x-icon" href="{{asset('bundles/app/frontend/img/favicon.ico')}}" />
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="description" content="Peça a sua carona de forma mais rápida">
+        {% if app.environment == "prod" %}
+            <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-KCZ235B');</script>
+        {% endif %}
+        {% block stylesheets %}
+            {% stylesheets output='css/compressed-panel.css' filter='cssrewrite' filter='?uglifycss'
+            'bundles/app/admin-panel/vendor/bootstrap/css/bootstrap.min.css'
+            'bundles/app/admin-panel/css/admin.css'
+            'bundles/app/admin-panel/vendor/font-awesome/css/font-awesome.min.css'
+            'bundles/app/admin-panel/vendor/datatables/dataTables.bootstrap4.css'
+            'bundles/app/admin-panel/css/custom.css'
+            %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="print,screen" />
+            {% endstylesheets %}
+        {% endblock %}
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body class="fixed-nav sticky-footer" id="page-top">
+        {% if app.environment == "prod" %}
+            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCZ235B"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        {% endif %}
+
+        <div class="se-pre-con"></div>
+
+        {% block header %}
+            {% include 'AppBundle::header-inner.html.twig' %}
+        {% endblock %}
+
+        {% block body %}{% endblock %}
+
+        {% block footer %}
+            {% include 'AppBundle::footer-inner.html.twig' %}
+        {% endblock %}
+
+        {% block javascripts %}
+            {% javascripts output='js/compressed-panel.js' filter='?uglifyjs2'
+              '@AppBundle/Resources/public/admin-panel/vendor/jquery/jquery.min.js'
+              '@AppBundle/Resources/public/admin-panel/vendor/bootstrap/js/bootstrap.bundle.min.js'
+              '@AppBundle/Resources/public/admin-panel/vendor/jquery-easing/jquery.easing.min.js'
+              '@AppBundle/Resources/public/admin-panel/vendor/chart.js/Chart.js'
+              '@AppBundle/Resources/public/admin-panel/vendor/datatables/jquery.dataTables.js'
+              '@AppBundle/Resources/public/admin-panel/vendor/datatables/dataTables.bootstrap4.js'
+              '@AppBundle/Resources/public/admin-panel/vendor/jquery.selectbox-0.2.js'
+              '@AppBundle/Resources/public/admin-panel/vendor/retina-replace.min.js'
+              '@AppBundle/Resources/public/admin-panel/vendor/jquery.magnific-popup.min.js'
+              '@AppBundle/Resources/public/admin-panel/js/admin.js'
+              '@AppBundle/Resources/public/admin-panel/js/admin-charts.js'
+              '@FOSJsRoutingBundle/Resources/public/js/router.js'
+              'js/fos_js_routes.js'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+          {% endjavascripts %}
+        {% endblock %}
+        {% if app.environment == "prod" %}
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99258627-1"></script>
+            <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/7a10dba5-78a9-4bcf-884d-189e94c7d18e-loader.js"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments)};
+                gtag('js', new Date());
+                gtag('config', 'UA-99258627-1');
+            </script>
+        {% endif %}
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+         <!-- Logout Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tem certeza?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-primary" href="{{ path('user_logout') }}">Sair</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </body>
+</html>
