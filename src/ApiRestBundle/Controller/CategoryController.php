@@ -10,6 +10,7 @@ use FOS\RestBundle\Controller\Annotations as FOS;
 use AppBundle\Entity\Category;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerBuilder;
 
 class CategoryController extends Controller
 {
@@ -23,14 +24,9 @@ class CategoryController extends Controller
         $service = $this->get('api.service.category');
         $category = $service->searchAllCategory();
 
-        $context = new SerializationContext();
-        $context->setSerializeNull(true);
+        $serializer = SerializerBuilder::create()->build();
+        $return = $serializer->serialize($category, 'json');
+        return new Response($return, 200, array('Content-Type' => 'application/json'));
 
-        $serializer = $this->get('jms_serializer');
-
-        $response = new Response($serializer->serialize($category, 'json', $context));
-        $response->headers->set('Content-Type', 'application/json');
-        
-        return $response;
     }
 }

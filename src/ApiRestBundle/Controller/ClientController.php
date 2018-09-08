@@ -10,6 +10,7 @@ use FOS\RestBundle\Controller\Annotations as FOS;
 use AppBundle\Entity\Client;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerBuilder;
 
 class ClientController extends Controller
 {
@@ -23,14 +24,8 @@ class ClientController extends Controller
         $service = $this->get('api.service.client');
         $client = $service->searchAllClient();
 
-        $context = new SerializationContext();
-        $context->setSerializeNull(true);
-
-        $serializer = $this->get('jms_serializer');
-
-        $response = new Response($serializer->serialize($client, 'json', $context));
-        $response->headers->set('Content-Type', 'application/json');
-        
-        return $response;
+        $serializer = SerializerBuilder::create()->build();
+        $return = $serializer->serialize($client, 'json');
+        return new Response($return, 200, array('Content-Type' => 'application/json'));
     }
 }
