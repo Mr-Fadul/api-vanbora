@@ -1,7 +1,7 @@
 <header class="header menu_2">
 	<div id="preloader"><div data-loader="circle-side"></div></div>
 	<div id="logo">
-		<a href="#"><img src="{{asset('bundles/app/frontend/img/logo.png')}}" width="80" height="60" data-retina="true" alt=""></a>
+		<a href="#"><img src="{{asset('bundles/app/frontend/img/logo.png')}}" width="60" height="40" data-retina="true" alt=""></a>
 	</div>
 	<ul id="top_menu">
 		{% if app.user is null %}
@@ -19,8 +19,8 @@
 	</a>
 	<nav id="menu" class="main-menu">
 		<ul>
-			<li><span><a href="#">Página inicial</a></span></li>
-			<li><span><a href="#">Motoristas</a></span></li>
+			<li><span><a href="{{ path('homepage') }}">Página inicial</a></span></li>
+			<li><span><a href="{{ path('driver') }}">Motoristas</a></span></li>
 			<li><span><a href="#">Ajuda</a></span></li>
 			{% if app.user is null %}
 				<li><span><a href="#">Faça parte</a></span>

@@ -12,6 +12,8 @@ class HomeController extends Controller{
      * @Route("/", name="homepage")
      */
     public function indexAction(Request $request){
-        return $this->render('AppBundle:Home:index.html.twig');
+    	$em = $this->getDoctrine()->getManager();
+    	$categories = $em->getRepository("AppBundle:Category")->findAll();
+        return $this->render('AppBundle:Home:index.html.twig', array('categories' => $categories));
     }
 }

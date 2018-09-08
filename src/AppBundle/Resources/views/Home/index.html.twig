@@ -82,30 +82,20 @@
 				<p>Faça a sua busca de acordo com as nossas categorias</p>
 			</div>
 			<div class="row">
-				<div class="col-lg-4 col-md-6 wow" data-wow-offset="150">
-					<a href="#" class="grid_item">
-						<figure class="block-reveal">
-							<div class="block-horizzontal"></div>
-							<img src="{{asset('bundles/app/frontend/img/bg_cars.jpg')}}" class="img-fluid" alt="">
-							<div class="info">
-								<small><i class="ti-layers"></i>15 opções</small>
-								<h3>Caronas</h3>
-							</div>
-						</figure>
-					</a>
-				</div>
-				<div class="col-lg-4 col-md-6 wow" data-wow-offset="150">
-					<a href="#" class="grid_item">
-						<figure class="block-reveal">
-							<div class="block-horizzontal"></div>
-							<img src="{{asset('bundles/app/frontend/img/bg_vans.jpg')}}" class="img-fluid" alt="">
-							<div class="info">
-								<small><i class="ti-layers"></i>23 opções</small>
-								<h3>Vans</h3>
-							</div>
-						</figure>
-					</a>
-				</div>
+				{% for category in categories %}
+					<div class="col-lg-4 col-md-6 wow" data-wow-offset="150">
+						<a href="#" class="grid_item">
+							<figure class="block-reveal">
+								<div class="block-horizzontal"></div>
+								<img src="{{asset("uploads/category/photo/"~category.photo)}}" class="img-fluid" alt="">
+								<div class="info">
+									<small><i class="ti-layers"></i>15 opções</small>
+									<h3>{{ category.name }}</h3>
+								</div>
+							</figure>
+						</a>
+					</div>
+				{% endfor %}
 			</div>
 		</div>
 		<div class="bg_color_1">
