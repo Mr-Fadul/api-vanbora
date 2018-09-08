@@ -1,0 +1,14 @@
+services:
+    api.service.util.servico_base:
+        abstract: true
+        calls:
+            - [setEntityManager, ["@doctrine.orm.entity_manager"]]
+            - [setFormFactory, ["@form.factory"]]
+            - [setTokenStorage, ["@security.token_storage"]]
+            - [setUserManager, ["@fos_user.user_manager"]]
+
+    api.service.usuario:
+        class: ApiRestBundle\Service\UserService
+        parent: api.service.util.servico_base
+        calls:
+            - [setRepository, [UserBundle:User]]

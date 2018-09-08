@@ -1,0 +1,187 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: doctrine_extensions.yml }
+    - { resource: fos/fos_user.yml }
+    - { resource: "@ApiRestBundle/Resources/config/config.yml" }
+    - { resource: "@ApiRestBundle/Resources/config/services.yml" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+
+framework:
+    #esi: ~
+    #translator: { fallbacks: ['%locale%'] }
+    secret: '%secret%'
+    router:
+        resource: '%kernel.root_dir%/config/routing.yml'
+        strict_requirements: ~
+    form: ~
+    csrf_protection: ~
+    validation: { enable_annotations: true }
+    #serializer: { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale: '%locale%'
+    trusted_hosts: ~
+    trusted_proxies: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id: ~
+    fragments: ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    cache: false
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+
+
+ivory_ck_editor:
+    default_config: default
+    configs:
+        default:
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters: []
+
+emoe_guzzle:
+    log:
+        enabled: true # Logging requests to Monolog
+        format: 'Guzzle: [{ts}] "{method} {uri} HTTP/{version}" {code}' # Optional log format customization
+
+iulyanp_elixir_mix:
+    web_dir: "%web_dir%"
+
+fos_facebook:
+  alias:  facebook
+  app_id: 328231401084858
+  secret: fc34a0a0fb23aa26ed3672d4ae1048ec
+  cookie: true
+  permissions: [email]
+
+assetic:
+    debug: '%kernel.debug%'
+    bundles:
+        - FrameworkBundle
+        - SecurityBundle
+        - TwigBundle
+        - MonologBundle
+        - SwiftmailerBundle
+        - DoctrineBundle
+        - AsseticBundle
+        - AppBundle
+        - ApiRestBundle
+        - UserBundle
+    filters:
+        uglifyjs2:
+            # the path to the uglifyjs executable
+            bin: '%kernel.root_dir%/Resources/node_modules/.bin/uglifyjs'
+        cssrewrite: ~
+        uglifycss:
+            bin: '%kernel.root_dir%/Resources/node_modules/.bin/uglifycss'
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
+        charset: UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: '%kernel.root_dir%/data/data.db3'
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #path: '%database_path%'
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport:  smtp
+    port:       465
+    encryption: ssl
+    auth_mode:  login
+    host:       webdeckvps.peopleshostvps.com
+    username:   contato@seliganessahistoria.ver.tc
+    password:   LZl_6)XyDE)V
+    spool:          { type: memory }
+
+fm_elfinder:
+    instances:
+        default:
+            locale: %locale% # defaults to current request locale
+            editor: ckeditor # other options are tinymce, tinymce4, form, custom and simple
+            fullscreen: true # defaults true, applies to simple and ckeditor editors
+            include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
+            connector:
+                debug: false # defaults to false
+                roots:       # at least one root must be defined
+                    uploads:
+                        #show_hidden: false # defaults to false
+                        driver: LocalFileSystem
+                        path: arquivos
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                        upload_deny: ['all']
+                        upload_max_size: 12M
+
+# Nelmio CORS Configuration
+nelmio_cors:
+    defaults:
+        allow_credentials: false
+        allow_origin: ['*']
+        allow_headers: ['*']
+        allow_methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+        max_age: 3600
+        hosts: []
+        origin_regex: false
+
+fos_rest:
+    format_listener: true
+    view:
+        view_response_listener: 'force'
+        formats:
+            xml: false
+            json : true
+        templating_formats:
+            html: true
+        force_redirects:
+            html: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+    routing_loader:
+        default_format: json
+    serializer:
+        serialize_null: true
+
+nelmio_api_doc:
+    name: vanbora
+    sandbox:
+        authentication:
+            name: access_token      # access token name or query parameter name or header name
+            delivery: query          # `query`, `http`, and `header` are supported
+            type:     basic         # `basic`, `bearer` are supported
+            custom_endpoint: false  # default is `false`, if `true`, your user will be able to
+                                    # specify its own endpoint
+        enabled:  true              # default is `true`, you can set this parameter to `false`
+        accept_type: application/json           # default is `~` (`null`), if set, the value is
+        body_format:
+            formats: [ form, json ]             # array of enabled body formats,
+            default_format: form                # default is `form`, determines whether to send
+        request_format:
+            formats:                            # default is `json` and `xml`,
+                json: application/json          # override to add custom formats or disable
+                xml: application/xml            # the default formats
+            method: format_param    # default is `format_param`, alternately `accept_header`,
+            default_format: json    # default is `json`,
+                                    # default content format to request (see formats)

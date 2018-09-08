@@ -1,0 +1,35 @@
+# Learn more about services, parameters and containers at
+# https://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+
+services:
+    acme_user.password_resetting:
+          class: AppBundle\EventListener\PasswordResettingListener
+          arguments: [ "@router", "@security.authorization_checker" ]
+          tags:
+              - { name: kernel.event_subscriber }
+
+    vanbora.session.listener:
+        class: AppBundle\Listener\SessionListener
+        arguments: ['@security.context', '@service_container', '@router']
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    login_listener:
+        class: AppBundle\Listener\LoginListener
+        arguments: ['@security.context', '@doctrine', '@service_container']
+        tags:
+        - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
+    #service_name:
+    #    class: AppBundle\Directory\ClassName
+    #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+    fos_facebook.user.login:
+        class: AppBundle\Security\User\Provider\FacebookProvider
+        arguments:
+            facebook: "@fos_facebook.api"
+            userManager: "@fos_user.user_manager"
+            entityManager: "@doctrine.orm.entity_manager"
+            validator: "@validator"
+            container: "@service_container"
+    fos_user.doctrine_registry:
+        alias: doctrine

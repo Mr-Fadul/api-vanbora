@@ -1,0 +1,50 @@
+{% extends '::base_inner.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    {% if app.user is null %}
+      {% if error is defined and error %}
+        <div>
+            <section class="alert alert-danger oh m-none">
+                {{ error|trans }}
+                <div class="close-btn" data-dismiss="alert">×</div>
+            </section>
+        </div>
+      {% endif %}
+
+      <section id="login-user">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-4 col-sm-6 col-xs-12 panel-theme col-centered text-left">
+                      <h1 class="login">Nova senha solicitada </h1>
+                      <p>Enviamos para o seu e-mail o link para você redefinir a sua senha. </p>
+                      <div class="col-md-12 col-sm-12 col-xs-12 hidden-xs or mg-b20 mg-t20">
+                          <p>ou</p>
+                      </div>
+                      <!--/.-->
+                      <a href="{{ path('fos_user_security_login') }}">
+                          <div class="col-md-12 col-sm-12 col-xs-12 text-center nopadding-p mg-t10">
+                            <button type="submit" class="btn col-md-12 col-sm-12 col-xs-12 btn-main">entrar</button>
+                        </div>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </section>
+    {% else %}
+        <section id="login-user">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-xs-12 panel-theme col-centered text-left">
+                        <h1 class="login">Você já está logado no momento, clique em 'MINHA CONTA' e aproveite.</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

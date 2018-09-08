@@ -1,0 +1,69 @@
+<nav id="sidebar" class="px-0 bg-yellow bg-gradient sidebar">
+    <ul class="nav nav-pills flex-column">
+        <li class="logo-nav-item">
+            <center><a class="navbar-brand" href="#">
+                <img src="{{asset('bundles/app/frontend/img/logo.png')}}" width="80" height="60" alt="Vanbora">
+            </a></center>
+        </li>
+        <li>
+            <h6 class="nav-header">Página inicial</h6>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{{ path('backend_home') }}">
+                <i class="batch-icon batch-icon-browser-alt"></i>
+                Painel
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link nav-parent" href="#">
+                <i class="batch-icon batch-icon-user"></i>
+                Usuários
+            </a>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Administradores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Motoristas</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav nav-pills flex-column">
+        <li>
+            <h6 class="nav-header">Cadastros gerais</h6>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="batch-icon batch-icon-paper-roll"></i>
+                Categorias
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="batch-icon batch-icon-folder-add"></i>
+                Anúncios
+            </a>
+        </li>
+    </ul>
+    <ul class="nav nav-pills flex-column">
+        <li>
+            <h6 class="nav-header">Análises</h6>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="batch-icon batch-icon-document"></i>
+                Documentos
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="batch-icon batch-icon-spam-alt"></i>
+                Denúncias
+            </a>
+        </li>
+    </ul>
+</nav>

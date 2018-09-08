@@ -1,0 +1,167 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+	<main>
+		<section class="header-video">
+			<div id="hero_video">
+				<div>
+					<h3><strong>Ache a sua carona</strong><br> no vanbora</h3>
+					<p>Baixe o nosso app e <strong>tenha conforto na sua ida para casa</strong> <br><br><a href="#" class="btn_1 rounded">BAIXE AGORA</a></p>
+				</div>
+				<a href="#first_section" class="btn_explore hidden_tablet"><i class="ti-arrow-down"></i></a>
+			</div>
+			<img src="img/video_fix.png" alt="" class="header-video--media" data-video-src="video/intro" data-teaser-source="{{asset('bundles/app/frontend/video/intro')}}" data-provider="" data-video-width="1920" data-video-height="960">
+		</section>
+		<ul id="grid_home" class="clearfix">
+			<li>
+				<a href="#" class="img_container">
+					<img src="http://via.placeholder.com/600x400/ccc/fff/grid_home_1.jpg" alt="">
+					<div class="short_info">
+						<h3><strong>Latest Udema</strong>Courses</h3>
+						<div><span class="btn_1 rounded">Read more</span></div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="img_container">
+					<img src="http://via.placeholder.com/600x400/ccc/fff/grid_home_1.jpg" alt="">
+					<div class="short_info">
+						<h3><strong>Community</strong>Students</h3>
+						<div><span class="btn_1 rounded">Read more</span></div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="img_container">
+					<img src="http://via.placeholder.com/600x400/ccc/fff/grid_home_1.jpg" alt="">
+					<div class="short_info">
+						<h3><strong>Admission</strong>Apply</h3>
+						<div><span class="btn_1 rounded">Submit</span></div>
+					</div>
+				</a>
+			</li>
+		</ul>
+		<div class="container-fluid margin_120_0" id="first_section">
+			<div class="main_title_2">
+				<span><em></em></span>
+				<h2>Populares no Vanbora</h2>
+				<p>Veja os motoristas mais populares</p>
+			</div>
+			<div id="reccomended" class="owl-carousel owl-theme">
+				<div class="item">
+					<div class="box_grid">
+						<figure>
+							<a href="#" class="wish_bt"></a>
+							<a href="#">
+								<div class="preview"><span>Ver</span></div><img src="{{asset('bundles/app/frontend/img/bg_alvorada.jpg')}}" class="img-fluid" alt=""></a>
+							<div class="price">R$39,00</div>
+
+						</figure>
+						<div class="wrapper">
+							<small>Categoria</small>
+							<h3>Carona</h3>
+							<p>Passo pelo bairro Alvorada</p>
+							<div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(6)</small></div>
+						</div>
+						<ul>
+							<li><i class="icon_like"></i> 10</li>
+							<li><a href="#">Detalhes</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<p class="btn_home_align"><a href="#" class="btn_1 rounded">Ver todas as opções</a></p>
+			</div>
+			<hr>
+		</div>
+		<div class="container margin_30_95">
+			<div class="main_title_2">
+				<span><em></em></span>
+				<h2>Categorias</h2>
+				<p>Faça a sua busca de acordo com as nossas categorias</p>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6 wow" data-wow-offset="150">
+					<a href="#" class="grid_item">
+						<figure class="block-reveal">
+							<div class="block-horizzontal"></div>
+							<img src="{{asset('bundles/app/frontend/img/bg_cars.jpg')}}" class="img-fluid" alt="">
+							<div class="info">
+								<small><i class="ti-layers"></i>15 opções</small>
+								<h3>Caronas</h3>
+							</div>
+						</figure>
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6 wow" data-wow-offset="150">
+					<a href="#" class="grid_item">
+						<figure class="block-reveal">
+							<div class="block-horizzontal"></div>
+							<img src="{{asset('bundles/app/frontend/img/bg_vans.jpg')}}" class="img-fluid" alt="">
+							<div class="info">
+								<small><i class="ti-layers"></i>23 opções</small>
+								<h3>Vans</h3>
+							</div>
+						</figure>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="bg_color_1">
+			<div class="container margin_120_95">
+				<div class="main_title_2">
+					<span><em></em></span>
+					<h2>Notícias e eventos</h2>
+					<p>Acompanhe as nossas notícias e também os nossos eventos</p>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<a class="box_news" href="#">
+							<figure><img src="{{asset('bundles/app/frontend/img/bg_notice.jpg')}}" alt="">
+								<figcaption><strong>06</strong>Set</figcaption>
+							</figure>
+							<ul>
+								<li>Daniel</li>
+								<li>06.09.2018</li>
+							</ul>
+							<h4>Hackaton</h4>
+							<p>Venha participar do nosso hackaton e diverta-se...</p>
+						</a>
+					</div>
+				</div>
+				<p class="btn_home_align"><a href="#" class="btn_1 rounded">Ver todas as notícias</a></p>
+			</div>
+		</div>
+		<div class="call_section">
+			<div class="container clearfix">
+				<div class="col-lg-5 col-md-6 float-right wow" data-wow-offset="250">
+					<div class="block-reveal">
+						<div class="block-vertical"></div>
+						<div class="box_1">
+							<h3>Entre na nossa comunidade</h3>
+							<p>Ir de carro fica caro? Faça parte da nossa comunidade e encontre pessoas que moram perto da sua casa</p>
+							<a href="#" class="btn_1 rounded">Leia mais</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?uglifyjs2'
+        '@AppBundle/Resources/public/frontend/js/video_header.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    <script type="text/javascript">
+    	HeaderVideo.init({
+			container: $('.header-video'),
+			header: $('.header-video--media'),
+			videoTrigger: $("#video-trigger"),
+			autoPlayVideo: true
+		});
+    </script>
+    {% endjavascripts %}
+{% endblock %}

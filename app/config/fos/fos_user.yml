@@ -1,0 +1,11 @@
+# FOS User
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: UserBundle\Entity\User
+    from_email:
+        address:        contato@vanbora.today
+        sender_name:    Vanbora
+    resetting:
+        email:
+            template: email/password_resetting.email.twig

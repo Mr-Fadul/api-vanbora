@@ -1,0 +1,16 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            46985e565f18b640ef221dbc36e1f650a2035574
+    samba_videos_player_key: 8528ced8822292b6b3a822625834252d
+    web_dir: "%kernel.root_dir%/../web"
+
+    # database_host: localhost
+    # database_port: 3306
+    # database_name: vanbora_oficial
+    # database_user: root
+    # database_password:
+

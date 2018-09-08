@@ -1,0 +1,63 @@
+{% extends '::base_inner.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Vanbora - Alteração de Senha{% endblock %}
+
+{% block body %}
+    {% if app.user is null %}
+        <section id="login-user" class="vertical-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        {% if error is defined %}
+                            <section class="alert alert-danger alert-dismissable fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {#{{ error|trans }}#}
+                                {{ error.messageKey|trans(error.messageData, 'security') }}
+                            </section>
+                            <!--/.alert-->
+                        {% endif %}
+                    </div>
+                    <!--/.col alert section-->
+                    <div class="col-md-4 col-sm-6 col-xs-12 panel-theme col-centered text-left">
+                        <h1 class="login">Redefinir a senha</h1>
+                        <form id="reseting" action="{{ path('fos_user_resetting_send_email') }}" method="post">
+                            {% if invalid_username is defined %}
+                                Usuário não cadastrado
+                            {% endif %}
+                            <div class="input-group">
+                                <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-envelope-o"></i></span>
+                                <input type="text" placeholder="Digite seu email" id="username" name="username" class="form-control" />
+                            </div>
+                            <!--/.name-->
+                            <div class="col-md-12 col-sm-12 col-xs-12 text-center nopadding-p mg-t10">
+                                <button type="submit" class="btn btn-main">Redefinir senha</button>
+                            </div>
+                            <!-- -->
+                        </form>
+                        <!-- -->
+                    </div>
+                    <!--/. col-centered-->
+                </div>
+                <!--/.row-->
+            </div>
+            <!--/.container-->
+        </section>
+        <!--/.section-->
+    {% else %}
+        <section id="login-user">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12 panel-theme col-centered text-left">
+                    <h1>Você já está logado no momento, clique em 'MINHA CONTA' e aproveite.</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

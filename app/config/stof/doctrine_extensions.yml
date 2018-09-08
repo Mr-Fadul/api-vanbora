@@ -1,0 +1,7 @@
+# Doctrine Extensions
+stof_doctrine_extensions:
+    default_locale: en
+    orm:
+        default:
+            tree: true
+            timestampable: false # not needed: listeners are not enabled by default

@@ -1,0 +1,5 @@
+# This file is auto-generated during the composer install
+parameters:
+    secret: ThisTokenIsNotSoSecretChangeIt
+    samba_videos_player_key: 8528ced8822292b6b3a822625834252d
+    web_dir: '%kernel.root_dir%/../web'

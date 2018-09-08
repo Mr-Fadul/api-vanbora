@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>{% block title %}Vanbora - O seu app de carona{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{asset('bundles/app/frontend/img/favicon.ico')}}" />
+        <meta name="robots" content="index, follow">
+        <meta name="description" content="Peça a sua carona de forma mais rápida">
+        {% if app.environment == "prod" %}
+            <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-KCZ235B');</script>
+        {% endif %}
+        {% block stylesheets %}
+            {% stylesheets output='css/compressed-frontend.css' filter='cssrewrite' filter='?uglifycss'
+            'bundles/app/frontend/css/bootstrap.min.css'
+            'bundles/app/frontend/css/style.css'
+            'bundles/app/frontend/css/vendors.css'
+            'bundles/app/frontend/css/icon_fonts/css/all_icons.min.css'
+            %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="print,screen" />
+            {% endstylesheets %}
+        {% endblock %}
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        {{ facebook_initialize({'xfbml': true}) }}
+    </head>
+    <body id="login_bg">
+        {% if app.environment == "prod" %}
+            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCZ235B"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        {% endif %}
+
+        <div class="se-pre-con"></div>
+
+        {% block messages %}
+            {% include '::messages.flash.html.twig' %}
+        {% endblock %}
+
+        {% block body %}{% endblock %}
+
+        {% block javascripts %}
+            {% javascripts output='js/compressed-frontend.js' filter='?uglifyjs2'
+              '@AppBundle/Resources/public/frontend/js/jquery-2.2.4.min.js'
+              '@AppBundle/Resources/public/frontend/js/common_scripts.js'
+              '@AppBundle/Resources/public/frontend/js/main.js'
+              '@FOSJsRoutingBundle/Resources/public/js/router.js'
+              '@AppBundle/Resources/public/frontend/js/validate.js'
+              'js/fos_js_routes.js'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+          {% endjavascripts %}
+            <script type="text/javascript">
+              function loginFacebook() {
+                  FB.login(function(response) {
+                      if (response.authResponse) {
+                          window.location.replace(authurl);
+                      }
+                  },{
+                      scope:'email'
+                  });
+              }
+            </script>
+        {% endblock %}
+        {% if app.environment == "prod" %}
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99258627-1"></script>
+            <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/7a10dba5-78a9-4bcf-884d-189e94c7d18e-loader.js"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments)};
+                gtag('js', new Date());
+                gtag('config', 'UA-99258627-1');
+            </script>
+        {% endif %}
+    </body>
+</html>

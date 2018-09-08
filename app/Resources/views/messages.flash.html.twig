@@ -1,0 +1,43 @@
+<section id="alert">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                {% if app.session.flashBag.has('success') %}
+                    <div class="alert alert-success" id="alert-dismissable" style="z-index: 9999;">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                        {% for msg in app.session.flashBag.get('success') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if app.session.flashBag.has('info') %}
+                    <div class="alert alert-info" id="alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                        {% for msg in app.session.flashBag.get('info') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if app.session.flashBag.has('warning') %}
+                    <div class="alert alert-warning" id="alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                        {% for msg in app.session.flashBag.get('warning') %}
+                        {{ msg }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if app.session.flashBag.has('error') %}
+                    <div class="alert alert-danger" id="alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                        {% for msg in app.session.flashBag.get('error') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>      
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

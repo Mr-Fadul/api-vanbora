@@ -1,0 +1,64 @@
+{% extends '::base-login.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Vanbora - Login{% endblock %}
+
+{% block body %}
+    {% if app.user is null %}
+      <nav id="menu" class="fake_menu"></nav>
+        <div id="preloader">
+            <div data-loader="circle-side"></div>
+        </div>
+        <div id="login">
+            <aside>
+                <figure>
+                    <a href="#"><img src="{{asset('bundles/app/frontend/img/logo.png')}}" width="80" height="60" data-retina="true" alt=""></a>
+                </figure>
+                {% if error %}
+                    <section class="alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        Credenciais inválidas. Verifique o usuário e senha e tente novamente.
+                    </section>
+                {% endif %}
+                  <form action="{{ path("fos_user_security_check") }}" method="post">
+                    <div class="access_social">
+                        <a href='#' onclick="loginFacebook()" class="social_bt facebook">Entre com o seu Facebook</a>
+                    </div>
+                    <div class="divider"><span>ou</span></div>
+                    <div class="form-group">
+                        <span class="input">
+                        <input class="input_field" type="text" autocomplete="off" name="_username" value="{{ last_username }}" required="required">
+                            <label class="input_label">
+                            <span class="input__label-content">E-mail</span>
+                        </label>
+                        </span>
+
+                        <span class="input">
+                        <input class="input_field" type="password" autocomplete="new-password" name="_password" required="required">
+                            <label class="input_label">
+                            <span class="input__label-content">Senha</span>
+                        </label>
+                        </span>
+                        <small><a href="#">Esqueceu a senha?</a></small>
+                    </div>
+                    <input type='submit' value='Entre' class="btn_1 rounded full-width add_top_60">
+                    <div class="text-center add_top_10">Novo? <strong><a href="#">Cadastre-se!</a></strong></div>
+                </form>
+                <div class="copy">© 2018 Vanbora</div>
+            </aside>
+        </div>
+    {% else %}
+        <div id="login">
+            <aside>
+                <figure>
+                    <a href="#"><img src="{{asset('bundles/app/frontend/img/logo.png')}}" width="80" height="60" data-retina="true" alt=""></a>
+                </figure>
+                Você já está logado no momento, <a href='{{ path('homepage') }}'>clique aqui</a> e aproveite.
+                <div class="copy">© 2018 Vanbora</div>
+            </aside>
+        </div>
+    {% endif %}
+{% endblock body %}
+
+
+    

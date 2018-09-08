@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Vanbora - Administrativo</title>
+        <link rel="icon" type="image/x-icon" href="{{asset('bundles/app/frontend/img/favicon.ico')}}" />
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="description" content="Peça a sua carona de forma mais rápida">
+        {% block stylesheets %}
+            {% stylesheets output='css/compressed-backend.css' filter='cssrewrite' filter='?uglifycss'
+            'bundles/app/backend/fonts/batch-icons/css/batch-icons.css'
+            'bundles/app/backend/css/bootstrap/bootstrap.min.css'
+            'bundles/app/backend/css/bootstrap/mdb.min.css'
+            'bundles/app/backend/plugins/custom-scrollbar/jquery.mCustomScrollbar.min.css'
+            'bundles/app/backend/css/hamburgers/hamburgers.css'
+            'bundles/app/backend/fonts/font-awesome/css/font-awesome.min.css'
+            'bundles/app/backend/plugins/jvmaps/jqvmap.min.css'
+            'bundles/app/backend/css/quillpro/quillpro.css'
+            %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="print,screen" />
+            {% endstylesheets %}
+        {% endblock %}
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+        {% block sidebar %}
+            {% include '::Backend/sidebar.html.twig' %}
+        {% endblock %}
+        {% block header %}
+            {% include '::Backend/header.html.twig' %}
+        {% endblock %}
+
+        {% block messages %}
+            {% include '::messages.flash.html.twig' %}
+        {% endblock %}
+
+        {% block body %}{% endblock %}
+
+        {% block javascripts %}
+            {% javascripts output='js/compressed-backend.js' filter='?uglifyjs2'
+              '@AppBundle/Resources/public/backend/js/jquery/jquery-3.1.1.min.js'
+              '@AppBundle/Resources/public/backend/js/bootstrap/popper.min.js'
+              '@AppBundle/Resources/public/backend/js/bootstrap/bootstrap.min.js'
+              '@AppBundle/Resources/public/backend/js/bootstrap/mdb.min.js'
+              '@AppBundle/Resources/public/backend/plugins/velocity/velocity.min.js'
+              '@AppBundle/Resources/public/backend/plugins/velocity/velocity.ui.min.js'
+              '@AppBundle/Resources/public/backend/plugins/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js'
+              '@AppBundle/Resources/public/backend/plugins/jquery_visible/jquery.visible.min.js'
+              '@AppBundle/Resources/public/backend/plugins/chartjs/chart.bundle.min.js'
+              '@AppBundle/Resources/public/backend/plugins/jvmaps/jquery.vmap.min.js'
+              '@AppBundle/Resources/public/backend/plugins/jvmaps/maps/jquery.vmap.usa.js'
+              '@AppBundle/Resources/public/backend/js/misc/holder.min.js'
+              '@AppBundle/Resources/public/backend/js/scripts.js'
+              '@FOSJsRoutingBundle/Resources/public/js/router.js'
+              'js/fos_js_routes.js'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+          {% endjavascripts %}
+        {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

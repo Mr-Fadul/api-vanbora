@@ -1,0 +1,67 @@
+{% extends '::base_inner.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+     {% if app.user is null %}
+        {% if error is defined and error %}
+          <div class="alert alert-block alert-danger fade in">
+              <button type="button" class="close close-sm" data-dismiss="alert">
+                  <i class="fa fa-times"></i>
+              </button>
+              {{ error|trans }}
+          </div>
+        {% endif %}
+
+        <section id="login-user">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-xs-12 panel-theme col-centered text-left">
+                        <h1 class="login">Alteração de Senha</h1>
+                        <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="post">
+                            {{ form_widget(form._token) }}
+
+                            {% block messages %}
+                                {{ parent() }}
+                                {{ form_errors(form) }}
+                            {% endblock %}
+
+                            {% if invalid_username is defined %}
+                                Usuário não cadastrado
+                            {% endif %}
+
+                            <div class="input-group last">
+                                <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-unlock-alt"></i></span>
+                                {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'Nova Senha'} }) }}
+                                <p class="help-block">{{ form_errors(form.plainPassword.first) }}</p>
+                            </div>
+                            <div class="input-group last">
+                                <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-unlock-alt"></i></span>
+                                {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Confirmar Senha'} }) }}
+                                <p class="help-block">{{ form_errors(form.plainPassword.second) }}</p>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 text-center nopadding-p mg-t10">
+                                <button type="submit" class="btn btn-main">Alterar senha</button>
+                            </div>
+                        </form>
+                    </div> <!-- form-box login-box -->
+                </div>
+            </div>
+        </section>
+    {% else %}
+        <section id="login-user">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-xs-12 panel-theme col-centered text-left">
+                        <h1 class="login">Você já está logado no momento, clique em 'MINHA CONTA' e aproveite.</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
