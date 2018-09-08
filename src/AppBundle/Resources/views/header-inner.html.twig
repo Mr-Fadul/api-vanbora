@@ -11,18 +11,34 @@
                         <span class="nav-link-text">Painel</span>
                     </a>
                 </li>
+                {% if is_granted("ROLE_PROFESSIONAL") %}
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Painel">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-fw fa-newspaper-o"></i>
+                            <span class="nav-link-text">Novo anúncio</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Painel">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-fw fa-car"></i>
+                            <span class="nav-link-text">Novo veiculo</span>
+                        </a>
+                    </li> 
+                {% endif %}
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mensagens">
                     <a class="nav-link" href="#">
                     <i class="fa fa-fw fa-envelope-open"></i>
                         <span class="nav-link-text">Mensagens</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Favoritos">
-                    <a class="nav-link" href="#">
-                        <i class="fa fa-fw fa-star"></i>
-                        <span class="nav-link-text">Favoritos</span>
-                    </a>
-                </li>
+                {% if is_granted("ROLE_USER") %}
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Favoritos">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-fw fa-star"></i>
+                            <span class="nav-link-text">Favoritos</span>
+                        </a>
+                    </li>
+                {% endif %}
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Comentários">
                     <a class="nav-link" href="#">
                         <i class="fa fa-fw fa-archive"></i>
@@ -41,6 +57,14 @@
                         <li>
                             <a href="#">Editar interesses</a>
                         </li>
+                        {% if is_granted("ROLE_PROFESSIONAL") %}
+                            <li>
+                                <a href="#">Verificar meu status</a>
+                            </li>
+                            <li>
+                                <a href="#">Minha documentação</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </li>
             </ul>
