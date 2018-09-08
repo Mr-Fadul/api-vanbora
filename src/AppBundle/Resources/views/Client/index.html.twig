@@ -1,0 +1,99 @@
+{% extends '::base-login.html.twig' %}
+
+{% block title %}Vanbora - Cadastre-se{% endblock %}
+
+{% block body -%}
+    {% if app.user is null %}
+        <nav id="menu" class="fake_menu"></nav>
+	
+	<div id="preloader">
+		<div data-loader="circle-side"></div>
+	</div>
+	<!-- End Preload -->
+	
+	<div id="login">
+		<aside>
+			<figure>
+				<a href="#"><img src="{{asset('bundles/app/frontend/img/logo.png')}}" width="80" height="60" data-retina="true" alt=""></a>
+			</figure>
+			{% if error %}
+                    <section class="alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{ error }}
+                    </section>
+                {% endif %}
+			<form action="{{ path("client_signup") }}" method="post" autocomplete="off">
+				<div class="form-group">
+					<span class="input">
+						<input class="input_field" type="text" required="required" name='firstName' autocomplete="off">
+							<label class="input_label">
+							<span class="input__label-content">Nome</span>
+						</label>
+					</span>
+					<span class="input">
+						<input class="input_field" type="text" required="required" name='lastName' autocomplete="off">
+							<label class="input_label">
+							<span class="input__label-content">Sobrenome</span>
+						</label>
+					</span>
+					<span class="input">
+						<input class="input_field" type="text" required="required" name='cpf' autocomplete="off">
+							<label class="input_label">
+							<span class="input__label-content">CPF</span>
+						</label>
+					</span>
+					<span class="input">
+						<input class="input_field" type="text" required="required" name='celphone' autocomplete="off">
+							<label class="input_label">
+							<span class="input__label-content">Celular</span>
+						</label>
+					</span>
+					<span class="input">
+						<input class="input_field" type="email" required="required" name='email' autocomplete="off">
+							<label class="input_label">
+							<span class="input__label-content">Email</span>
+						</label>
+					</span>
+					<span class="input">
+						<input class="input_field" type="password" id="password1" required="required" name="client_custom[plainPassword]">
+							<label class="input_label">
+							<span class="input__label-content">Senha</span>
+						</label>
+					</span>
+					<span class="input">
+						<input class="input_field" type="password" id="password2" required="required" name="client_custom[confirmPassword]">
+							<label class="input_label">
+							<span class="input__label-content">Confirme sua senha</span>
+						</label>
+					</span>
+					<div id="pass-info" class="clearfix"></div>
+				</div>
+				<input type='submit' value='Cadastre-se' class="btn_1 rounded full-width add_top_30">
+				<div class="text-center add_top_10">Já possui uma conta? <strong><a href="{{ path('fos_user_security_login') }}">Entre já</a></strong></div>
+			</form>
+			<div class="copy">© 2018 Vanbora</div>
+		</aside>
+	</div>
+        <!--/.section-->
+    {% else %}
+        <div id="login">
+            <aside>
+                <figure>
+                    <a href="#"><img src="{{asset('bundles/app/frontend/img/logo.png')}}" width="80" height="60" data-retina="true" alt=""></a>
+                </figure>
+                Você já está logado no momento, <a href='{{ path('homepage') }}'>clique aqui</a> e aproveite.
+                <div class="copy">© 2018 Vanbora</div>
+            </aside>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?uglifyjs2'
+        '@AppBundle/Resources/public/js/custom/Client/passwordStrong.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+
+    {% endjavascripts %}
+{% endblock %}

@@ -39,10 +39,10 @@
                             <span class="input__label-content">Senha</span>
                         </label>
                         </span>
-                        <small><a href="#">Esqueceu a senha?</a></small>
+                        <small><a href="{{ path('fos_user_resetting_request') }}">Esqueceu a senha?</a></small>
                     </div>
                     <input type='submit' value='Entre' class="btn_1 rounded full-width add_top_60">
-                    <div class="text-center add_top_10">Novo? <strong><a href="#">Cadastre-se!</a></strong></div>
+                    <div class="text-center add_top_10">Novo? <strong><a href="{{ path('client_signup') }}">Cadastre-se!</a></strong></div>
                 </form>
                 <div class="copy">© 2018 Vanbora</div>
             </aside>

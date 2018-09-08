@@ -112,10 +112,14 @@ swiftmailer:
     port:       465
     encryption: ssl
     auth_mode:  login
-    host:       webdeckvps.peopleshostvps.com
-    username:   contato@seliganessahistoria.ver.tc
-    password:   LZl_6)XyDE)V
-    spool:          { type: memory }
+    #prod
+    host:       caeli.tv
+    username:   contato@caeli.tv
+    password:   ++caeli++
+    #ver.tc
+    #host: caeli.ver.tc
+    #username: contato@caeli.ver.tc
+    #password: 6vafn^[(4d1P
 
 fm_elfinder:
     instances:

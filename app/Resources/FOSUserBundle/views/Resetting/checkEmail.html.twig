@@ -1,4 +1,4 @@
-{% extends '::base_inner.html.twig' %}
+{% extends '::base-login.html.twig' %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
@@ -33,15 +33,15 @@
           </div>
       </section>
     {% else %}
-        <section id="login-user">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-6 col-xs-12 panel-theme col-centered text-left">
-                        <h1 class="login">Você já está logado no momento, clique em 'MINHA CONTA' e aproveite.</h1>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div id="login">
+            <aside>
+                <figure>
+                    <a href="#"><img src="{{asset('bundles/app/frontend/img/logo.png')}}" width="80" height="60" data-retina="true" alt=""></a>
+                </figure>
+                Você já está logado no momento, <a href='{{ path('homepage') }}'>clique aqui</a> e aproveite.
+                <div class="copy">© 2018 Vanbora</div>
+            </aside>
+        </div>
     {% endif %}
 {% endblock body %}
 

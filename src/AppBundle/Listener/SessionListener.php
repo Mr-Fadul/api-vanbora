@@ -35,10 +35,10 @@ class SessionListener
                 // Compare the stored session ID to the current session ID with the user
                 if ($token->getUser() && ($token->getUser()->getSessionId()!=null && $token->getUser()->getSessionId() !== $this->container->get('session')->getId()) && !$this->securityContext->isGranted('ROLE_SUPER_ADMIN')) {
                     // Tell the user that someone else has logged on with a different device
-                    $this->container->get('session')->getFlashBag()->set(
+                    /*$this->container->get('session')->getFlashBag()->set(
                         'error',
                         'Outro dispositivo se logou com este login e senha. Para acessar novamente, preencha seu login e senha. Atenção: o outro dispositivo será deslogado automaticamente.'
-                    );
+                    );*/
                     // Kick this user out, because a new user has logged in
                     $this->securityContext->setToken(null);
                     // Redirect the user back to the login page, or else they'll still be trying to access the dashboard (which they no longer have access to)

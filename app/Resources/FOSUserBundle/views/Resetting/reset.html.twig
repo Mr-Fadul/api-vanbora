@@ -1,62 +1,65 @@
-{% extends '::base_inner.html.twig' %}
+{% extends '::base-login.html.twig' %}
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block body %}
      {% if app.user is null %}
-        {% if error is defined and error %}
-          <div class="alert alert-block alert-danger fade in">
-              <button type="button" class="close close-sm" data-dismiss="alert">
-                  <i class="fa fa-times"></i>
-              </button>
-              {{ error|trans }}
-          </div>
-        {% endif %}
 
-        <section id="login-user">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-6 col-xs-12 panel-theme col-centered text-left">
-                        <h1 class="login">Alteração de Senha</h1>
-                        <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="post">
-                            {{ form_widget(form._token) }}
+        <nav id="menu" class="fake_menu"></nav>
+        <div id="preloader">
+            <div data-loader="circle-side"></div>
+        </div>
+        <div id="login">
+            <aside>
+                <figure>
+                    <a href="#"><img src="{{asset('bundles/app/frontend/img/logo.png')}}" width="80" height="60" data-retina="true" alt=""></a>
+                </figure>
+                {% if error is defined %}
+                    <section class="alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        Não funcionou
+                    </section>
+                {% endif %}
+                  <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="post">
+                    {{ form_widget(form._token) }}
 
-                            {% block messages %}
-                                {{ parent() }}
-                                {{ form_errors(form) }}
-                            {% endblock %}
+                    {% block messages %}
+                        {{ parent() }}
+                        {{ form_errors(form) }}
+                    {% endblock %}
 
-                            {% if invalid_username is defined %}
-                                Usuário não cadastrado
-                            {% endif %}
+                    {% if invalid_username is defined %}
+                        Usuário não cadastrado
+                    {% endif %}
+                    <div class="form-group">
 
-                            <div class="input-group last">
-                                <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-unlock-alt"></i></span>
-                                {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'Nova Senha'} }) }}
-                                <p class="help-block">{{ form_errors(form.plainPassword.first) }}</p>
-                            </div>
-                            <div class="input-group last">
-                                <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-unlock-alt"></i></span>
-                                {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Confirmar Senha'} }) }}
-                                <p class="help-block">{{ form_errors(form.plainPassword.second) }}</p>
-                            </div>
-                            <div class="col-md-12 col-sm-12 col-xs-12 text-center nopadding-p mg-t10">
-                                <button type="submit" class="btn btn-main">Alterar senha</button>
-                            </div>
-                        </form>
-                    </div> <!-- form-box login-box -->
-                </div>
-            </div>
-        </section>
-    {% else %}
-        <section id="login-user">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-6 col-xs-12 panel-theme col-centered text-left">
-                        <h1 class="login">Você já está logado no momento, clique em 'MINHA CONTA' e aproveite.</h1>
+                        <span class="input">
+                        <input class="input_field" type="password" autocomplete="new-password" name="fos_user_resetting_form[plainPassword][first]" required="required">
+                            <label class="input_label">
+                            <span class="input__label-content">Senha</span>
+                        </label>
+                        </span>
+                        <span class="input">
+                        <input class="input_field" type="password" autocomplete="new-password" name="fos_user_resetting_form[plainPassword][second]" required="required">
+                            <label class="input_label">
+                            <span class="input__label-content">Confirmar senha</span>
+                        </label>
+                        </span>
                     </div>
-                </div>
-            </div>
-        </section>
+                    <input type='submit' value='Alterar senha' class="btn_1 rounded full-width add_top_60">
+                </form>
+                <div class="copy">© 2018 Vanbora</div>
+            </aside>
+        </div>
+    {% else %}
+        <div id="login">
+            <aside>
+                <figure>
+                    <a href="#"><img src="{{asset('bundles/app/frontend/img/logo.png')}}" width="80" height="60" data-retina="true" alt=""></a>
+                </figure>
+                Você já está logado no momento, <a href='{{ path('homepage') }}'>clique aqui</a> e aproveite.
+                <div class="copy">© 2018 Vanbora</div>
+            </aside>
+        </div>
     {% endif %}
 
 

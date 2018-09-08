@@ -30,10 +30,16 @@
 					</ul>
 				</li>
 			{% endif %}
-			{% if is_granted("ROLE_SUPER_ADMIN") %}
+			{% if app.user != null %}
 				<li><span><a href="#">Meu perfil</a></span>
 					<ul>
-						<li><a href="{{ path('backend_home') }}"><img src="{% if app.user.photo == null %} {{asset('bundles/app/frontend/img/user.jpg')}} {% else %} {{asset("uploads/user/photo/"~app.user.photo)}} {% endif %}" width="20" height="20" data-retina="true" alt="">&nbsp;Administrar</a></li>
+						{% if is_granted("ROLE_SUPER_ADMIN") %}
+							<li><a href="{{ path('backend_home') }}"><img src="{% if app.user.photo == null %} {{asset('bundles/app/frontend/img/user.jpg')}} {% else %} {{asset("uploads/user/photo/"~app.user.photo)}} {% endif %}" width="20" height="20" data-retina="true" alt="">&nbsp;Administrar</a></li>
+						{% elseif is_granted("ROLE_USER") %}
+							<li><a href="#"><img src="{% if app.user.photo == null %} {{asset('bundles/app/frontend/img/user.jpg')}} {% else %} {{asset("uploads/user/photo/"~app.user.photo)}} {% endif %}" width="20" height="20" data-retina="true" alt="">&nbsp;Painel</a></li>
+						{% else %}
+							<li><a href="#"><img src="{% if app.user.photo == null %} {{asset('bundles/app/frontend/img/user.jpg')}} {% else %} {{asset("uploads/user/photo/"~app.user.photo)}} {% endif %}" width="20" height="20" data-retina="true" alt="">&nbsp;Painel</a></li>
+						{% endif %}
 						<li><a href="{{ path('user_logout') }}">Sair</a></li>
 					</ul>
 				</li>

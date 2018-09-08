@@ -18,7 +18,7 @@ use JMS\Serializer\Annotation\Expose;
  * @ORM\Table(name="user")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"user" = "User", "client" = "AppBundle\Entity\Client"})
+ * @ORM\DiscriminatorMap({"user" = "User", "client" = "AppBundle\Entity\Client", "driver" = "AppBundle\Entity\Driver"})
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  * @ExclusionPolicy("all")
  */

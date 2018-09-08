@@ -1,0 +1,43 @@
+{% extends '::Backend/base.html.twig' %}
+
+{% block body %}
+    <main class="main-content p-5" role="main">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Cadastro</h1>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form role="form"  action="{{ path('backend_category_create') }}" method="post" {{ form_enctype(form) }}>
+                                    {{ form_widget(form._token) }}
+
+                                    {% block messages %}
+                                        {{ parent() }}
+                                        {{ form_errors(form) }}
+                                    {% endblock %}
+
+                                    {% include 'AppBundle:Backend/Category:form.html.twig' with {'form': form} %}
+                                    <div class="form-group">
+                                        <div class="col-md-8 col-md-offset-4">
+                                            <button type="submit" class="btn btn-secondary waves-effect waves-light">
+                                                Cadastrar
+                                            </button>
+                                            <a class="btn btn-light waves-effect waves-light" href="{{ path('backend_category') }}">
+                                                Cancelar
+                                            </a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

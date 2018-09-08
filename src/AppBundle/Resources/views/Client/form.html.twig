@@ -1,0 +1,92 @@
+
+{{ form_widget(form.photo) }}
+<div class="box-body">
+    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+        <div class="input-group">
+            {{ form_errors(form.first_name) }}
+            <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-user"></i></span>
+            {{ form_widget(form.first_name, {'attr': {'class': 'form-control', 'placeholder':'Nome', 'required':'require',  'data-model':'first_name'}}) }}
+        </div>
+    </div>
+    <!--/.name-->
+    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+        <div class="input-group">
+            {{ form_errors(form.last_name) }}
+            <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-user"></i></span>
+            {{ form_widget(form.last_name, {'attr': {'class': 'form-control', 'placeholder':'Sobrenome', 'required':'require'}}) }}
+        </div>
+    </div>
+    <!--/.last_name-->
+
+    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+        <div class="input-group">
+            {{ form_errors(form.email) }}
+            <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-envelope-o"></i></span>
+            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder':'Email', 'required':'require'}}) }}
+        </div>
+    </div>
+    <!--/.email-->
+    {% if client.id is not defined  %}
+        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+            <div class="input-group">
+                <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-unlock-alt"></i></span>
+                <input type="password" id="client_plainpassword" name="client_custom[plainPassword]" maxlength="255" class="form-control" required="required" autocomplete="off" placeholder="Senha">
+            </div>
+        </div>
+        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+            <div class="input-group">
+                <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-unlock-alt"></i></span>
+                <input type="password" id="client_confirmpassword" name="client_custom[confirmPassword]" maxlength="255" class="form-control" autocomplete="off" placeholder="Confirme a senha">
+            </div>
+        </div>
+        <!--/.pass-->
+    {% else %}
+        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+            <div class="input-group">
+                <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-unlock-alt"></i></span>
+                <input type="password" id="client_plainpassword" name="client_custom[plainPassword]" maxlength="255" class="form-control" autocomplete="off" placeholder="Senha">
+            </div>
+        </div>
+        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+            <div class="input-group">
+                <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-unlock-alt"></i></span>
+                <input type="password" id="client_confirmpassword" name="client_custom[confirmPassword]" maxlength="255" class="form-control" autocomplete="off" placeholder="Confirme a senha">
+            </div>
+        </div>
+        <!--/.pass-->
+    {% endif %}
+
+    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+        <div class="input-group">
+            {{ form_errors(form.cpf) }}
+            <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-neuter"></i></span>
+            {{ form_widget(form.cpf, {'attr': {'class': 'form-control', 'placeholder':'CPF', 'required':'require'}}) }}
+        </div>
+    </div>
+    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+        <div class="input-group">
+            {{ form_errors(form.phone) }}
+            <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-fax"></i></span>
+            {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'placeholder':'Telefone', 'required':'require'}}) }}
+        </div>
+    </div>
+    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+        <div class="input-group">
+            {{ form_errors(form.celphone) }}
+            <span class="input-group-addon" id="btnGroupAddon"><i class="fa fa-phone"></i></span>
+            {{ form_widget(form.celphone, {'attr': {'class': 'form-control', 'placeholder':'Celular', 'required':'require'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+        {{ form_errors(form.photoTemp) }}
+        {{ form_widget(form.photoTemp, {'attr': { 'data-iconName': 'fa fa-upload', 'data-input': 'false', 'class': 'filestyle form-control', 'data-buttonText':'Selecione sua imagem de perfil: 160 x 160', 'accept' :'image/x-png,image/gif,image/jpeg'}}) }}
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12 text-center nopadding-p mg-t20 mg-b20">
+        <div id="alert-danger" class="alert alert-danger alert-dismissable fade in hidden">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <span class="msg-error"></span>
+        </div>
+    </div>
+</div><!-- /.box-body -->

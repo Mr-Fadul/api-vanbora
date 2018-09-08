@@ -3,59 +3,73 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Service\UploadService;
+use UserBundle\Entity\User;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Driver
  *
  * @ORM\Table(name="driver")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\DriverRepository")
- * @ORM\HasLifecycleCallbacks()
+ * @ExclusionPolicy("all")
  */
-class Driver{
-
+class Driver extends User
+{
     /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cpf", type="string")
+     * @ORM\Column(name="cpf", type="string", length=255, nullable=true)
+     * @Expose
      */
     private $cpf;
 
     /**
-     * @var \DateTime
+     * Set cpf
      *
-     * @ORM\Column(name="dt_creation", type="datetime", nullable=true)
-     * @Gedmo\Timestampable(on="create")
+     * @param string $cpf
+     *
+     * @return Client
      */
-    private $dtCreation;
+    public function setCpf($cpf)
+    {
+        $this->cpf = $cpf;
+
+        return $this;
+    }
 
     /**
-     * @var \DateTime
+     * Get cpf
      *
-     * @ORM\Column(name="dt_update", type="datetime", nullable=true)
-     * @Gedmo\Timestampable(on="update")
+     * @return string
      */
-    private $dtUpdate;
+    public function getCpf()
+    {
+        return $this->cpf;
+    }
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId(){
-        return $this->id;
+    public function formatCpf()
+    {
+        if (!$this->cpf) {
+            return '';
+        }
+
+        $cpf = substr($this->cpf, 0, 3) . '.';
+        $cpf .= substr($this->cpf, 3, 3) . '.';
+        $cpf .= substr($this->cpf, 6, 3) . '-';
+        $cpf .= substr($this->cpf, 9, 2);
+
+        return $cpf;
     }
 }
