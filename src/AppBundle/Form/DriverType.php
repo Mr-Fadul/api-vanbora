@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-class ClientType extends AbstractType
+class DriverType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -36,7 +36,7 @@ class ClientType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Client'
+            'data_class' => 'AppBundle\Entity\Driver'
         ));
     }
 
@@ -45,6 +45,6 @@ class ClientType extends AbstractType
      */
     public function getName()
     {
-        return 'client';
+        return 'driver';
     }
 }

@@ -1,0 +1,53 @@
+{% extends '::Backend/base.html.twig' %}
+
+{% block body -%}
+<main class="main-content p-5" role="main">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Editar - {{ entity.firstName }}</h1>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form role="form" action="{{ path('backend_client_update',{'id': entity.id}) }}" method="post" {{ form_enctype(edit_form) }}>
+                                    <input type="hidden" name="_method" value="PUT" />
+                                    {{ form_widget(edit_form._token) }}
+
+                                    {% block messages %}
+                                        {{ parent() }}
+                                        {{ form_errors(edit_form) }}
+                                    {% endblock %}
+
+                                    {% include 'AppBundle:Backend/Client:form.html.twig' with {'form': edit_form} %}
+                                    <div class="form-group">
+                                        <div class="col-md-8 col-md-offset-4">
+                                            <button type="submit" class="btn btn-secondary waves-effect waves-light">
+                                                Atualizar
+                                            </button>
+                                            <a class="btn btn-light waves-effect waves-light" href="{{ path('backend_client') }}">
+                                                Cancelar
+                                            </a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?uglifyjs2'
+        '@AppBundle/Resources/public/js/app/ajaxlocation.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
