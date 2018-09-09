@@ -1331,16 +1331,16 @@ ul#grid_home li {
   }
 }
 ul#grid_home li:nth-child(1) .short_info {
-  background-color: #372675;
-  background-color: rgba(57, 39, 121, 0.8);
+  background-color: #ffc108;
+  background-color: rgba(255, 193, 8, 0.3);
 }
 ul#grid_home li:nth-child(2) .short_info {
-  background-color: #8e268b;
-  background-color: rgba(146, 39, 143, 0.8);
+  background-color: #5c4800;
+  background-color: rgba(93, 73, 0, 0.3);
 }
 ul#grid_home li:nth-child(3) .short_info {
-  background-color: #392779;
-  background-color: #392779;
+  background-color: #443500;
+  background-color: #433400;
 }
 ul#grid_home li a.img_container {
   position: relative;
