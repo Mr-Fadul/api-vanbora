@@ -323,9 +323,9 @@ a.btn_1.outline,
 }
 a.btn_1.outline:hover,
 .btn_1.outline:hover {
-  background: #0054a6;
+  background: #5C4803;
   color: #fff;
-  border-color: #0054a6;
+  border-color: #5C4803;
 }
 
 a.btn_explore {
@@ -4508,7 +4508,7 @@ ul.list_ok li:before {
   top: -10px;
   font-size: 32px;
   font-size: 2rem;
-  color: #8dc63f;
+  color: #ffc108;
 }
 
 ul.bullets {
