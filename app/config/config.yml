@@ -53,6 +53,9 @@ emoe_guzzle:
         enabled: true # Logging requests to Monolog
         format: 'Guzzle: [{ts}] "{method} {uri} HTTP/{version}" {code}' # Optional log format customization
 
+iulyanp_elixir_mix:
+    web_dir: "%web_dir%"
+
 fos_facebook:
   alias:  facebook
   app_id: 328231401084858
@@ -76,10 +79,10 @@ assetic:
     filters:
         uglifyjs2:
             # the path to the uglifyjs executable
-            bin: '%kernel.root_dir%/Resources/node_modules/.bin/uglifyjs'
+            bin: '%kernel.root_dir%/Resources/node_modules/uglify-js/bin/uglifyjs'
         cssrewrite: ~
         uglifycss:
-            bin: '%kernel.root_dir%/Resources/node_modules/.bin/uglifycss'
+            bin: '%kernel.root_dir%/Resources/node_modules/uglifycss/bin/uglifycss'
 
 # Doctrine Configuration
 doctrine:
