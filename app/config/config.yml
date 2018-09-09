@@ -53,9 +53,6 @@ emoe_guzzle:
         enabled: true # Logging requests to Monolog
         format: 'Guzzle: [{ts}] "{method} {uri} HTTP/{version}" {code}' # Optional log format customization
 
-iulyanp_elixir_mix:
-    web_dir: "%web_dir%"
-
 fos_facebook:
   alias:  facebook
   app_id: 328231401084858
