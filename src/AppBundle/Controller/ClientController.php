@@ -51,7 +51,7 @@ class ClientController extends BaseController{
 
                     $this->sendEmail('Vanbora - Confirmação de cadastro', $email, '
                             <div style="width: 100%; background: #020d16; padding: 10px 0;display:block;float:none;margin: 0 auto;">
-                            <img src="https://vanbora.today/bundles/app/frontend/img/logo.png" alt="Vanbora" style="margin: 0 auto;display:block;"/>
+                            <img src="https://beta.vanbora.today/bundles/app/frontend/img/logo.png" alt="Vanbora" style="margin: 0 auto;display:block;"/>
                             </div>
                             <div style="width: 39%; background: #fff; padding: 0 60px;display:block;float:none;margin: 0 auto;margin-top:45px;">
                             <h1 style="color: #020d16; font-weight:500; font-size: 18px;margin: -30px -45px 0 0;text-align:center;font-weight:600;">Seu cadastro foi efetuado com sucesso!</h1>

@@ -69,6 +69,21 @@ class ClientController extends BaseController{
                         $em->persist($entity);
                         $em->flush();
 
+                        $this->sendEmail('Vanbora - Bem vindo ao Vanbora', $email, '
+                            <div style="width: 100%; background: #020d16; padding: 10px 0;display:block;float:none;margin: 0 auto;">
+                            <img src="https://beta.vanbora.today/bundles/app/frontend/img/logo.png" alt="Vanbora" style="margin: 0 auto;display:block;"/>
+                            </div>
+                            <div style="width: 39%; background: #fff; padding: 0 60px;display:block;float:none;margin: 0 auto;margin-top:45px;">
+                            <h1 style="color: #020d16; font-weight:500; font-size: 18px;margin: -30px -45px 0 0;text-align:center;font-weight:600;">O seu email foi cadastrado no Vanbora com sucesso!</h1>
+                            <p style="color: #666666; font-weight: 400; font-size:16px;margin: 20px 0 0 0;text-align:left;line-height:24px;">'.$entity->getFirstName().'.<br><br></p>
+                            <p style="color: #666666; font-weight: 400; font-size:13px;margin:0;text-align:left;line-height:24px;">
+                            Agora ficou mais fácil a sua volta para casa, <br>baixe o nosso app e tenha acesso rapidamente.<br><br></p>
+                            <p style="color: #666666; font-weight: 400; font-size:15px;margin: 20px 0;text-align:left;">Um abraço,<br><b>Equipe Vanbora.</b></p>
+                            <p style="color: #666666; font-weight: 400; font-size:16px;margin: 20px 0;text-align:center;">Em caso de dúvida, entre em contato conosco.<br><a style="color: #666666;" href="mailto:contato@vanbora.today">contato@vanbora.today</a> </p>
+
+                            </div>
+                          ');
+
                         $request->getSession()
                          ->getFlashBag()
                          ->add('success', 'Registro criado com sucesso!');
@@ -318,6 +333,18 @@ class ClientController extends BaseController{
         $flag = $em->getRepository('AppBundle:Client')->getUserByNameAndUsername($entity);
 
         return $flag;
+    }
+
+    private function sendEmail($titulo, $email, $message)
+    {
+        $mailMessage = \Swift_Message::newInstance()
+              ->setSubject($titulo)
+              ->setFrom("contato@vanbora.today")
+              ->setTo($email)
+              ->setContentType("text/html")
+              ->setBody($message);
+
+        $this->get('mailer')->send($mailMessage);
     }
 
 }
