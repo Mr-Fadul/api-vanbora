@@ -1,0 +1,52 @@
+{% extends "::base-inner.html.twig" %}
+
+{% block body %}
+	<div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{{ path('dashboard_index') }}">Painel</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{{ path('dashboard_driver_documents') }}">Status da documentação</a>
+        </li>
+        <li class="breadcrumb-item active">Enviar documentos</li>
+      </ol>
+	  <!-- Icon Cards-->
+		<!-- /cards -->
+		<h2></h2>
+		{% if is_granted("ROLE_PROFESSIONAL") %}
+			<div class="box_general padding_bottom">
+			<div class="header_box version_2">
+				<h2><i class="fa fa-user"></i>Envie seus documentos agora</h2>
+			</div>
+			<div class="row">
+				<div class="col-md-8 add_top_30">
+					<form role="form"  action="{{ path('dashboard_driver_documents_create') }}" method="post" {{ form_enctype(form) }}>
+                        {{ form_widget(form._token) }}
+
+                        {% block messages %}
+                            {{ parent() }}
+                            {{ form_errors(form) }}
+                        {% endblock %}
+						{% include 'AppBundle:Dashboard/Driver:form.html.twig' with {'form': form} %}
+	                    <div class="form-group">
+	                        <div class="col-md-8 col-md-offset-4">
+	                            <button type="submit" class="btn btn-secondary waves-effect waves-light">
+	                                Cadastrar
+	                            </button>
+	                            <a class="btn btn-light waves-effect waves-light" href="{{ path('dashboard_driver_documents') }}">
+	                                Cancelar
+	                            </a>
+	                        </div>
+	                    </div>
+	                </form>
+				</div>
+			</div>
+		</div>
+		{% endif %}
+	  </div>
+	  <!-- /.container-fluid-->
+   	</div>
+{% endblock %}

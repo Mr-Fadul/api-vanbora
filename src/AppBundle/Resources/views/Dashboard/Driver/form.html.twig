@@ -1,0 +1,26 @@
+{{ form_widget(form.cnhImage) }}
+{{ form_widget(form.crlvImage) }}
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_errors(form.cnhImageTemp) }}
+            <label for="user_photoTemp">Foto da CNH</label>
+            {{ form_widget(form.cnhImageTemp, {'attr': {'class': 'form-control'}}) }}
+            {% if entity.cnhImage != null %}
+                <a href="{{ asset('uploads/documentsdriver/photo/' ~ entity.cnhImageTemp) }}">{{ entity.cnhImageTemp }}</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_errors(form.crlvImageTemp) }}
+            <label for="user_photoTemp">Foto da CRLV</label>
+            {{ form_widget(form.crlvImageTemp, {'attr': {'class': 'form-control'}}) }}
+            {% if entity.crlvImage != null %}
+                <a href="{{ asset('uploads/documentsdriver/photo/' ~ entity.crlvImageTemp) }}">{{ entity.crlvImageTemp }}</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
