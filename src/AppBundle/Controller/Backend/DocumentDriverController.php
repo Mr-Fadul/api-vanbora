@@ -83,15 +83,15 @@ class DocumentDriverController extends BaseController{
                   $entity->setStatus(1);
                   $entity->setPendingDescription(NULL);
                   $entity->setIsPending(0);
-                  $this->sendEmail('Vanbora - Documentação aprovada', $email, '
+                  $this->sendEmail('Vanbora - Documentação aprovada', $entity->getDriver()->getEmail(), '
                       <div style="width: 100%; background: #baebf7; padding: 10px 0;display:block;float:none;margin: 0 auto;">
                       <img src="https://beta.vanbora.today/bundles/app/frontend/img/logo.png" alt="Vanbora" style="width:80px; height:80px;margin: -6px auto;margin-top: -6px;margin-right: auto;margin-bottom: -6px;margin-left: auto;display:block;"/>
                       </div>
                       <div style="width: 39%; background: #fff; padding: 0 60px;display:block;float:none;margin: 0 auto;margin-top:45px;">
                       <h1 style="color: #020d16; font-weight:500; font-size: 18px;margin: -30px -45px 0 0;text-align:center;font-weight:600;">Documentação aprovada com sucesso!</h1>
-                      <p style="color: #666666; font-weight: 400; font-size:16px;margin: 20px 0 0 0;text-align:left;line-height:24px;">Olá, '.$entity->getFirstName().'.<br><br></p>
+                      <p style="color: #666666; font-weight: 400; font-size:16px;margin: 20px 0 0 0;text-align:left;line-height:24px;">Olá, '.$entity->getDriver()->getFirstName().'.<br><br></p>
                       <p style="color: #666666; font-weight: 400; font-size:13px;margin:0;text-align:left;line-height:24px;">
-                      A sua documentação foi aprovada com sucesso e você já pode oferecer caronas para publico, seja bem-vindo!.<br><br></p>
+                      A sua documentação foi aprovada com sucesso e você já pode oferecer caronas para o publico, seja bem-vindo!.<br><br></p>
                       <p style="color: #666666; font-weight: 400; font-size:15px;margin: 20px 0;text-align:left;">Um abraço,<br><b>Equipe Vanbora.</b></p>
                       <p style="color: #666666; font-weight: 400; font-size:16px;margin: 20px 0;text-align:center;">Em caso de dúvida, entre em contato conosco.<br><a style="color: #666666;" href="mailto:contato@vanbora.today">contato@vanbora.today</a> </p>
 
@@ -99,13 +99,15 @@ class DocumentDriverController extends BaseController{
                   '); 
                 }else{
                   $entity->setStatus(0);
-                  $this->sendEmail('Vanbora - Documentação suspensa', $email, '
+                  $entity->setIsPending(1);
+                  $entity->setPendingDescription('Suspensa via admin');
+                  $this->sendEmail('Vanbora - Documentação suspensa', $entity->getDriver()->getEmail(), '
                       <div style="width: 100%; background: #baebf7; padding: 10px 0;display:block;float:none;margin: 0 auto;">
                       <img src="https://beta.vanbora.today/bundles/app/frontend/img/logo.png" alt="Vanbora" style="width:80px; height:80px;margin: -6px auto;margin-top: -6px;margin-right: auto;margin-bottom: -6px;margin-left: auto;display:block;"/>
                       </div>
                       <div style="width: 39%; background: #fff; padding: 0 60px;display:block;float:none;margin: 0 auto;margin-top:45px;">
                       <h1 style="color: #020d16; font-weight:500; font-size: 18px;margin: -30px -45px 0 0;text-align:center;font-weight:600;">Problemas na sua documentação!</h1>
-                      <p style="color: #666666; font-weight: 400; font-size:16px;margin: 20px 0 0 0;text-align:left;line-height:24px;">Olá, '.$entity->getFirstName().'.<br><br></p>
+                      <p style="color: #666666; font-weight: 400; font-size:16px;margin: 20px 0 0 0;text-align:left;line-height:24px;">Olá, '.$entity->getDriver()->getFirstName().'.<br><br></p>
                       <p style="color: #666666; font-weight: 400; font-size:13px;margin:0;text-align:left;line-height:24px;">
                       Reenvie a sua documentação para que seus anúncios voltem, encontramos um problema e deixamos suspenso temporariamente.<br><br></p>
                       <p style="color: #666666; font-weight: 400; font-size:15px;margin: 20px 0;text-align:left;">Um abraço,<br><b>Equipe Vanbora.</b></p>
@@ -147,13 +149,13 @@ class DocumentDriverController extends BaseController{
         $entity->setPendingDescription($description);
         $em->flush();
 
-        $this->sendEmail('Vanbora - Pendência na documentação', $email, '
+        $this->sendEmail('Vanbora - Pendência na documentação', $entity->getDriver()->getEmail(), '
             <div style="width: 100%; background: #baebf7; padding: 10px 0;display:block;float:none;margin: 0 auto;">
             <img src="https://beta.vanbora.today/bundles/app/frontend/img/logo.png" alt="Vanbora" style="width:80px; height:80px;margin: -6px auto;margin-top: -6px;margin-right: auto;margin-bottom: -6px;margin-left: auto;display:block;"/>
             </div>
             <div style="width: 39%; background: #fff; padding: 0 60px;display:block;float:none;margin: 0 auto;margin-top:45px;">
             <h1 style="color: #020d16; font-weight:500; font-size: 18px;margin: -30px -45px 0 0;text-align:center;font-weight:600;">Contém pendências na sua documentação!</h1>
-            <p style="color: #666666; font-weight: 400; font-size:16px;margin: 20px 0 0 0;text-align:left;line-height:24px;">Olá, '.$entity->getFirstName().'.<br><br></p>
+            <p style="color: #666666; font-weight: 400; font-size:16px;margin: 20px 0 0 0;text-align:left;line-height:24px;">Olá, '.$entity->getDriver()->getFirstName().'.<br><br></p>
             <p style="color: #666666; font-weight: 400; font-size:13px;margin:0;text-align:left;line-height:24px;">
             Acesse agora mesmo o seu painel e veja o motivo pelo qual não conseguimos lhe aprovar.<br><br></p>
             <p style="color: #666666; font-weight: 400; font-size:15px;margin: 20px 0;text-align:left;">Um abraço,<br><b>Equipe Vanbora.</b></p>
