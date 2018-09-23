@@ -1,8 +1,10 @@
 <div class="box-body">
+    <label>CNH</label><br>
     {% if entity.cnhImage != null %}
         <img src="{{ asset('uploads/documentsdriver/photo/' ~ entity.cnhImage) }}" alt="" width="100" height="100"><br>
         <a href="{{ asset('uploads/documentsdriver/photo/' ~ entity.cnhImage) }}" target="_blank">Ver em tamanho original</a>
     {% endif %}<br><br><br>
+    <label>CRLV</label><br>
     {% if entity.crlvImage != null %}
         <img src="{{ asset('uploads/documentsdriver/photo/' ~ entity.crlvImage) }}" alt="" width="100" height="100"><br>
         <a href="{{ asset('uploads/documentsdriver/photo/' ~ entity.crlvImage) }}" target="_blank">Ver em tamanho original</a>
