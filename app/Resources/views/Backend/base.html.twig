@@ -62,6 +62,25 @@
             <script type="text/javascript" src="{{ asset_url }}"></script>
           {% endjavascripts %}
         {% endblock %}
+        <div class="modal fade bs-example-modal-sm" id="modalDocumentDriver" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Problemas na documentação</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <textarea name="description" id='descriptionDocument' rows="30" cols="10"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-light waves-effect waves-light" data-dismiss="modal">Fechar</button>
+                      <a onclick="sendDescription();"><button type="button" class="btn btn-secondary waves-effect waves-light">Enviar</button></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
         </div>
     </body>

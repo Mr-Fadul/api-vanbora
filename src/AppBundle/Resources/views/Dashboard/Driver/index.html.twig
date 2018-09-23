@@ -19,8 +19,16 @@
 					<h2><i class="fa fa-bar-chart"></i>Status da sua documentação</h2>
 				</div>
 			 	{% if document %}
-					{% if document.status == 0 %}
+					{% if document.status == 0 and document.ispending != 1 %}
 						<p>Documentação em análise... Assim que disponível, entraremos em contato via e-mail</p>
+					{% elseif document.ispending == 1 and document.status == 0 %}
+						{% if document.pendingdescription %}
+							<p>Seus documentos possuem pendências, e esse foi o motivo: </p>
+							<p> {{ document.pendingdescription }}</p>
+							<a href='{{ path('dashboard_driver_documents_new') }}'>Atualize agora mesmo</a>
+						{% else %}
+							<p>Seus documentos possuem pendências, mas não foram especificadas.</p>
+						{% endif %}
 					{% else %}
 						<p>Seus documentos estão ok, você pode realizar anúncios livremente.</p>
 					{% endif %}

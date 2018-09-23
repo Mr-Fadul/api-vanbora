@@ -6,8 +6,8 @@
             {{ form_errors(form.cnhImageTemp) }}
             <label for="user_photoTemp">Foto da CNH</label>
             {{ form_widget(form.cnhImageTemp, {'attr': {'class': 'form-control'}}) }}
-            {% if entity.cnhImage != null %}
-                <a href="{{ asset('uploads/documentsdriver/photo/' ~ entity.cnhImageTemp) }}">{{ entity.cnhImageTemp }}</a>
+            {% if document.cnhImage != null %}
+                <a href="{{ asset('uploads/documentsdriver/photo/' ~ document.cnhImageTemp) }}">{{ document.cnhImageTemp }}</a>
             {% endif %}
         </div>
     </div>
@@ -18,8 +18,8 @@
             {{ form_errors(form.crlvImageTemp) }}
             <label for="user_photoTemp">Foto da CRLV</label>
             {{ form_widget(form.crlvImageTemp, {'attr': {'class': 'form-control'}}) }}
-            {% if entity.crlvImage != null %}
-                <a href="{{ asset('uploads/documentsdriver/photo/' ~ entity.crlvImageTemp) }}">{{ entity.crlvImageTemp }}</a>
+            {% if document.crlvImage != null %}
+                <a href="{{ asset('uploads/documentsdriver/photo/' ~ document.crlvImageTemp) }}">{{ document.crlvImageTemp }}</a>
             {% endif %}
         </div>
     </div>

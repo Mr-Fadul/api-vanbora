@@ -33,9 +33,15 @@
 						{% include 'AppBundle:Dashboard/Driver:form.html.twig' with {'form': form} %}
 	                    <div class="form-group">
 	                        <div class="col-md-8 col-md-offset-4">
-	                            <button type="submit" class="btn btn-secondary waves-effect waves-light">
-	                                Cadastrar
-	                            </button>
+	                        	{% if document %}
+		                            <button type="submit" class="btn btn-secondary waves-effect waves-light">
+		                                Atualizar
+		                            </button>
+		                        {% else %}
+		                        	<button type="submit" class="btn btn-secondary waves-effect waves-light">
+		                                Salvar
+		                            </button>
+		                        {% endif %}
 	                            <a class="btn btn-light waves-effect waves-light" href="{{ path('dashboard_driver_documents') }}">
 	                                Cancelar
 	                            </a>

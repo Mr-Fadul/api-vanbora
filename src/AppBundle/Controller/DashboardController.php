@@ -56,15 +56,18 @@ class DashboardController extends BaseController{
         
         if ($this->get('security.authorization_checker')->isGranted('ROLE_PROFESSIONAL')) {
             $em = $this->getDoctrine()->getManager();
-            $document = $em->getRepository("AppBundle:DocumentDriver")->findOneByDriver($this->getUser());
+            $document = $em->getRepository("AppBundle:DocumentDriver")->findOneBy(array('driver' => $this->getUser(), 'status' => 1));
 
             if(!$document){
+
                 $entity = new DocumentDriver();
                 $form   = $this->createCreateForm($entity);
 
+                $documentDriver = $em->getRepository("AppBundle:DocumentDriver")->findOneByDriver($this->getUser());
                 return $this->render('AppBundle:Dashboard/Driver:new.html.twig',array(
                     'entity' => $entity,
                     'form'   => $form->createView(),
+                    'document' => $documentDriver
                 ));
             }else{
                 return $this->redirectToRoute('dashboard_driver_documents');
@@ -83,13 +86,21 @@ class DashboardController extends BaseController{
     public function driverDocumentsCreateAction(Request $request)
     {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_PROFESSIONAL')) {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $documentDriver = $em->getRepository("AppBundle:DocumentDriver")->findOneByDriver($this->getUser());
+            if($documentDriver){
+                $em->remove($documentDriver);
+                $em->flush();
+            }
+
             $entity = new DocumentDriver();
             $form = $this->createCreateForm($entity);
             $form->handleRequest($request);
 
             if ($form->isValid()) {
                     try {
-                        $em = $this->getDoctrine()->getManager();
                         $entity->setDriver($this->getUser());
                         $entity->setStatus(0);
 
@@ -110,7 +121,7 @@ class DashboardController extends BaseController{
 
             return $this->render('AppBundle:Dashboard/Driver:new.html.twig',array(
                 'entity' => $entity,
-                'form'   => $form->createView(),
+                'form'   => $form->createView()
             ));
         } else {
             throw $this->createNotFoundException('Você não tem permissão para acessar esta tela.');

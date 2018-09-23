@@ -1,0 +1,65 @@
+{% extends '::Backend/base.html.twig' %}
+
+{% block body %}
+<main class="main-content p-5" role="main">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Clientes</h1>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12 pb-5">
+                            <h2>Listagem de documentos</h2>
+                            <div class="table-responsive">
+                                <table id="datatableAdmin" class="table table-datatable table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nome - Motorista</th>
+                                            <th>Email - Motorista</th>
+                                            <th>Status</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for entity in entities %}
+                                            <tr class="list-clients">
+                                                <td>{{ entity.id }}</td>
+                                                <td>{{ entity.driver.fullName }}</td>
+                                                <td>{{ entity.driver.email }}</td>
+                                                {% if entity.status == 0 and entity.ispending != 1 %}
+                                                    <td>Aguardando análise</td>
+                                                {% else %}
+                                                    {% if entity.ispending == 1 and entity.status == 0 %}
+                                                        <td>Já avaliado com pendência</td>
+                                                    {% else %}
+                                                        <td>Aprovado</td>
+                                                    {% endif %}
+                                                {% endif %}
+                                                <td>
+                                                    <div class="btn-group" role="group">
+                                                        <button id="btnGroupVerticalDrop2" type="button" class="btn btn-secondary dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                            Veja as opções
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop2" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 39px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                            <a class="dropdown-item" href="{{ path('backend_document_driver_edit', { 'id': entity.id }) }}">Ver</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
