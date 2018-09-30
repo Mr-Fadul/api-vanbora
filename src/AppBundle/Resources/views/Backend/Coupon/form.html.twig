@@ -1,0 +1,32 @@
+<div class="box-body">
+    <div class="form-group">
+        {{ form_errors(form.promotionalCode) }}
+        <label for="teacher_name">Código Promocional</label>
+        {{ form_widget(form.promotionalCode, {'attr': {'class': 'form-control', 'required': 'true'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_errors(form.quantity) }}
+        <label for="teacher_name">Quantidade</label>
+        {{ form_widget(form.quantity, {'attr': {'class': 'form-control', 'required': 'true', 'min': '1'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_errors(form.expirationDate) }}
+        <label for="teacher_name">Data de validade</label>
+        {{ form_widget(form.expirationDate, {'attr': {'class': 'form-control datepicker', 'placeholder': 'Escolha a data'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_errors(form.typeValue) }}
+        <label for="teacher_bio">Tipo do Valor</label>
+        {{ form_widget(form.typeValue, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group monetaryValue" style="display:none;">
+        {{ form_errors(form.monetaryValue) }}
+        <label for="teacher_bio">Valor</label>
+        {{ form_widget(form.monetaryValue, {'attr': {'class': 'form-control money'}}) }}
+    </div>
+    <div class="form-group percentValue" style="display:none;">
+        {{ form_errors(form.percentValue) }}
+        <label for="teacher_bio">Valor</label>
+        {{ form_widget(form.percentValue, {'attr': {'class': 'form-control percent'}}) }}
+    </div>
+</div>
