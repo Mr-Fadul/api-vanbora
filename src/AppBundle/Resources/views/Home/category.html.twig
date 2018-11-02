@@ -1,0 +1,60 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+	<main>
+		<section id="hero_in" class="courses">
+			<div class="wrapper">
+				<div class="container">
+					<h1 class="fadeInUp"><span></span>Anúncios da categoria {{ category.name }}</h1>
+				</div>
+			</div>
+		</section>
+		<div class="container margin_60_35">
+			{% if ads %}
+				{% for ad in ads %}
+					<div class="box_list wow">
+						<div class="row no-gutters">
+							<div class="col-lg-5">
+								<figure class="block-reveal">
+									<div class="block-horizzontal"></div>
+									<a href="{{ path('ad_show',{'slug': ad.slug}) }}"><img src="{{asset("uploads/ad/photo/"~ad.photohighlight)}}" class="img-fluid" alt=""></a>
+									<div class="preview"><span>Ver</span></div>
+								</figure>
+							</div>
+							<div class="col-lg-7">
+								<div class="wrapper">
+									<div class="price">{{ ad.price }}</div>
+									<small>Categoria</small>
+									<h3>{{ ad.category.name }}</h3>
+									<p>{{ ad.shortdescription }}</p>
+								</div>
+								<ul>
+									<li><a href="{{ path('ad_show',{'slug': ad.slug}) }}">Detalhes</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			{% else %}
+				Nenhum anúncio nessa categoria
+			{% endif %}
+		</div>
+		<!-- /container -->
+		<div class="bg_color_1">
+			<div class="container margin_60_35">
+				<div class="row">
+					<div class="col-md-12">
+						<a href="#0" class="boxed_list">
+							<i class="pe-7s-help2"></i>
+							<h4>Precisa de ajuda?</h4>
+							<p>Entre em contato agora mesmo com contato@vanbora.today</p>
+						</a>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /bg_color_1 -->
+	</main>
+{% endblock %}

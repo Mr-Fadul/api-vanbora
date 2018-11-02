@@ -30,4 +30,21 @@ class HomeController extends Controller{
 
         return $this->render('AppBundle:Home:ads.html.twig', array('ads' => $ads));
     }
+
+    /**
+     * @Route("/categoria/{slug}", name="category_show")
+     */
+    public function categoryShowAction(Request $request,$slug){
+        $em = $this->getDoctrine()->getManager();
+
+        $category = $em->getRepository("AppBundle:Category")->findOneBySlug($slug);
+
+        if(!$category){
+            throw $this->createNotFoundException('Categoria inexistente.'); 
+        }
+
+        $ads = $em->getRepository("AppBundle:Ad")->findByCategory($category);
+
+        return $this->render('AppBundle:Home:category.html.twig', array('ads' => $ads,'category' => $category));
+    }
 }
