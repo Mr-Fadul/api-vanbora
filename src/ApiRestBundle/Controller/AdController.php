@@ -29,4 +29,19 @@ class AdController extends Controller
         return new Response($return, 200, array('Content-Type' => 'application/json'));
 
     }
+
+    /**
+     * @FOS\Get("/search/{query}", name="api_rest_ad_search", options={"method_prefix" = false, "expose"=true })
+     * @FOS\View(statusCode=200, serializerEnableMaxDepthChecks=true, serializerGroups={"listagemUsuario"})
+     */
+    public function searchAllAdAction(Request $request,$query)
+    {
+        $service = $this->get('api.service.ad');
+        $ad = $service->searchAd($query);
+
+        $serializer = SerializerBuilder::create()->build();
+        $return = $serializer->serialize($ad, 'json');
+        return new Response($return, 200, array('Content-Type' => 'application/json'));
+
+    }
 }

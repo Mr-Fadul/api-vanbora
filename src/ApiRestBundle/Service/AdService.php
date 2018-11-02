@@ -16,4 +16,10 @@ class AdService extends BaseService{
         return $ad;
     }
 
+    public function searchAd(){
+        $ad = $this->repository->findAll();
+
+        return $ad;
+    }
+    
 }
