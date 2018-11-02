@@ -13,9 +13,9 @@
                 </li>
                 {% if is_granted("ROLE_PROFESSIONAL") %}
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Painel">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ path('dashboard_ads') }}">
                             <i class="fa fa-fw fa-newspaper-o"></i>
-                            <span class="nav-link-text">Novo anúncio</span>
+                            <span class="nav-link-text">Meus anúncios</span>
                         </a>
                     </li>
                 {% endif %}

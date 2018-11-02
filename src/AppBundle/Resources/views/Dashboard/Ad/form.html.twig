@@ -1,0 +1,89 @@
+{{ form_widget(form.photo_highlight) }}
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_errors(form.name) }}
+            <label for="user_photoTemp">Nome</label>
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_errors(form.description) }}
+            <label for="user_photoTemp">Descrição longa</label>
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_errors(form.short_description) }}
+            <label for="user_photoTemp">Descrição curta</label>
+            {{ form_widget(form.short_description, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_errors(form.category) }}
+            <label for="user_photoTemp">Defina a categoria</label>
+            {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_errors(form.price) }}
+            <label for="user_photoTemp">Preço</label>
+            {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_errors(form.monthly) }}
+            <label for="user_photoTemp">Mensal?</label>
+            {{ form_widget(form.monthly, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_errors(form.photo_highlight_temp) }}
+            <label for="user_photo_highlight_temp">Foto destaque</label>
+            {{ form_widget(form.photo_highlight_temp, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
+        <label for="unity_licenses">Por onde passa?</label>
+        <table id="agency-tableTag" class="table table-bordered table-striped" data-prototypeTag="{{ _self.prototype_where_i_spend(form.where_i_spend.vars.prototype)|e }}" data-index-countTag="0">
+            {% macro prototype_where_i_spend(where_i_spend) %}
+                <tr class="agency-itemTag">
+                    <td>
+                        <a style="margin-top: 20px;" class="confirm-delete licences-remove-itemTag btn-sm btn-danger" href="javascript:void(0);" data-confirm-titleTag="Botão Delete" data-confirm-textTag="Confirma Deleção">
+                          <i class="icon-trash">Deletar</i>
+                      </a>
+                    </td>
+                    <td>
+                        {{ form_errors(where_i_spend.neighborhood) }}
+                        <label>Nome</label>
+                        {{ form_widget(where_i_spend.neighborhood, {'attr':{'class':'agencyTeacher'}}) }}
+                    </td>
+                </tr>
+            {% endmacro %}
+            <tbody>
+                {% for where_i_spend in form.where_i_spend %}
+                {{_self.prototype_where_i_spend(where_i_spend)}}
+                {% else %}
+                {% do form.where_i_spend.setRendered %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <a id="agency-addTag" href="javascript:void(0);" class="btn btn-info btn-add pull-right" title="Botão adicionar">Adicionar</a>
+    </div>
+</div>

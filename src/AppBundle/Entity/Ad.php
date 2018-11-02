@@ -72,12 +72,44 @@ class Ad
     private $monthly;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="photo_highlight", type="string", length=255, nullable=true)
+     */
+    private $photo_highlight;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WhereISpend", mappedBy="where", cascade={"all"}, orphanRemoval=true)
+     */
+    private $where_i_spend;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PhotoAd", mappedBy="photo_ad", cascade={"all"}, orphanRemoval=true)
+     */
+    private $photo;
+
+    /**
      * @var Duvidas
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
      */
     private $category;
+
+    /**
+     * @var DocumentDriver
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Driver")
+     * @ORM\JoinColumn(name="driver_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     */
+    private $driver;
 
     /**
      * @var \DateTime
@@ -94,6 +126,11 @@ class Ad
      * @Gedmo\Timestampable(on="update")
      */
     private $dtUpdate;
+
+    public function __construct(){
+        $this->where_i_spend = new ArrayCollection();
+        $this->photo = new ArrayCollection();
+    }
 
     public function __toString() {
         return $this->name;
@@ -258,24 +295,150 @@ class Ad
     }
 
     /**
-     * Set category
+     * Set active
      *
-     * @param Category $category
-     * @return Category
+     * @param boolean $active
+     *
+     * @return Ad
      */
-    public function setCategory($category = null){
-        $this->category = $category;
+    public function setActive($active){
+        $this->active = $active;
 
         return $this;
     }
 
     /**
-     * Get category
+     * Get active
      *
-     * @return Category
+     * @return boolean
+     */
+    public function getActive(){
+        return $this->active;
+    }
+
+    /**
+     * Set photo_highlight
+     *
+     * @param string $photo_highlight
+     *
+     * @return Ad
+     */
+    public function setPhotoHighlight($photo_highlight)
+    {
+        $this->photo_highlight = $photo_highlight;
+
+        return $this;
+    }
+
+    /**
+     * Get photo_highlight
+     *
+     * @return string
+     */
+    public function getPhotoHighlight()
+    {
+        return $this->photo_highlight;
+    }
+
+    /**
+     * Set where_i_spend
+     *
+     * @param Ad $where_i_spend
+     * @return Ad
+     */
+    public function setWhereISpend($where_i_spend = null){
+        $this->where_i_spend = $where_i_spend;
+
+        return $this;
+    }
+
+    /**
+     * Get where_i_spend
+     *
+     * @return Ad
+     */
+    public function getWhereISpend(){
+        return $this->where_i_spend;
+    }
+
+    public function addWhereISpend(WhereISpend $where_i_spend){
+        $where_i_spend->setWhere($this);
+
+        $this->where_i_spend->add($where_i_spend);
+    }
+
+    public function removeWhereISpend(WhereISpend $where_i_spend){
+        $this->where_i_spend->removeElement($where_i_spend);
+    }
+
+    /**
+     * Set photo
+     *
+     * @param Ad $photo
+     * @return Ad
+     */
+    public function setPhoto($photo = null){
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return Ad
+     */
+    public function getPhoto(){
+        return $this->photo;
+    }
+
+    public function addPhoto(PhotoAd $photo){
+        $photo->setPhotoAd($this);
+
+        $this->photo->add($photo);
+    }
+
+    public function removePhoto(PhotoAd $photo){
+        $this->photo->removeElement($photo);
+    }
+
+    /**
+     *
+     */
+    public function setCategory($category){
+        $this->category = $category;
+    }
+
+    /**
+     *
+     * @return type
      */
     public function getCategory(){
         return $this->category;
+    }
+
+    /**
+     * Set driver
+     *
+     * @param Driver $driver
+     *
+     * @return Ad
+     */
+    public function setDriver(Driver $driver = null)
+    {
+        $this->driver = $driver;
+
+        return $this;
+    }
+
+    /**
+     * Get driver
+     *
+     * @return Ad
+     */
+    public function getDriver()
+    {
+        return $this->driver;
     }
 
     /**
@@ -324,5 +487,100 @@ class Ad
     public function getDtUpdate()
     {
         return $this->dtUpdate;
+    }
+
+    /**
+     * Upload image
+     */
+
+    // Constante com o caminho para salvar a imagem screenshot
+    const UPLOAD_PATH_AD_PHOTO = 'uploads/ad/photo';
+
+    // 512000  bytes / 500 kbytes
+    // 1048576 bytes / 1024 kbytes
+    // 2097152 bytes / 2048 kbytes
+
+    /**
+     * @Assert\File(
+     *     maxSize = "3072k",
+     *     maxSizeMessage = "O tamanho da imagem é muito grande ({{ size }} {{ suffix }}), escolha uma imagem de até {{ limit }} {{ suffix }}",
+     *     mimeTypes = {"image/jpeg", "image/gif", "image/png"},
+     *     mimeTypesMessage = "Formato de arquivo inválido. Formatos permitidos: .gif, .jpeg e .png"
+     * )
+     */
+    private $photo_highlight_temp;
+
+    /**
+     * Sets photo_highlight_temp
+     *
+     * @param UploadedFile $photo_highlight_temp
+     */
+    public function setPhotoHighlightTemp(UploadedFile $photo_highlight_temp = null)
+    {
+        $this->photo_highlight_temp = $photo_highlight_temp;
+    }
+
+    /**
+     * Get photo_highlight_temp
+     *
+     * @return UploadedFile
+     */
+    public function getPhotoHighlightTemp()
+    {
+        return $this->photo_highlight_temp;
+    }
+
+    /**
+     * Unlink Photo (Apagar foto quando excluir objeto)
+     */
+    public function unlinkImages()
+    {
+        if ($this->getPhotoHighlight() != null) {
+            unlink(Ad::UPLOAD_PATH_AD_PHOTO ."/". $this->getPhotoHighlight());
+        }
+    }
+
+    public function uploadImage()
+    {
+
+        //Upload de foto destaque
+        if ($this->getPhotoHighlightTemp()!=null) {
+            //Se o diretorio não existir, cria
+            if (!file_exists(Ad::UPLOAD_PATH_AD_PHOTO)) {
+                mkdir(Ad::UPLOAD_PATH_AD_PHOTO, 0755, true);
+            }
+            if (
+              ($this->getPhotoHighlightTemp() != $this->getPhotoHighlight())
+              && (null !== $this->getPhotoHighlight())
+          ) {
+                unlink(Ad::UPLOAD_PATH_AD_PHOTO ."/". $this->getPhotoHighlight());
+            }
+
+            // Gera um nome único para o arquivo
+            $fileName = md5(uniqid()).'.'.$this->getPhotoHighlightTemp()->guessExtension();
+
+            UploadService::compress($this->getPhotoHighlightTemp(), Ad::UPLOAD_PATH_AD_PHOTO."/".$fileName, 100);
+
+            $this->photo_highlight = $fileName;
+            $this->setPhotoHighlightTemp(null);
+        }
+    }
+
+    /**
+     * Lifecycle callback to upload the file to the server
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function lifecycleFileUpload()
+    {
+        $this->uploadImage();
+    }
+
+    /**
+     * @ORM\PostLoad()
+     */
+    public function postLoad()
+    {
+        $this->dtUpdate = new \DateTime();
     }
 }

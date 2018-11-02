@@ -46,6 +46,20 @@ class DashboardController extends BaseController{
     }
 
     /**
+    * @Route("/meus-anuncios", name="dashboard_ads")
+    */
+    public function adAction(Request $request)
+    {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_PROFESSIONAL')) {
+            $em = $this->getDoctrine()->getManager();
+
+            $ads = $em->getRepository("AppBundle:Ad")->findByDriver($this->getUser());
+
+            return $this->render('AppBundle:Dashboard/Ad:index.html.twig',array('ads' => $ads));
+        }
+    }
+
+    /**
      * Displays a form to create a new DocumentDriver entity.
      *
      * @Route("/meus-documentos/enviar", name="dashboard_driver_documents_new")

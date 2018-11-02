@@ -1,0 +1,54 @@
+{% extends "::base-inner.html.twig" %}
+
+{% block body %}
+	<div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{{ path('dashboard_index') }}">Painel</a>
+        </li>
+        <li class="breadcrumb-item active">Meus anúncios</li>
+      </ol>
+	  <!-- Icon Cards-->
+		<!-- /cards -->
+		<h2></h2>
+		{% if is_granted("ROLE_PROFESSIONAL") %}
+			<div class="box_general padding_bottom">
+				<div class="header_box version_2">
+					<h2><i class="fa fa-bar-chart"></i>Seus anúncios</h2>
+				</div>
+			 	<p><a href='{{ path('ad_new') }}'>Crie agora mesmo</a></p>
+			 	<div class="list_general">
+					<ul>
+						{% for ad in ads %}
+							<li>
+								<figure><img src="{{asset("uploads/ad/photo/"~ad.photohighlight)}}" alt=""></figure>
+								<h4>{{ ad.name }} 
+									{% if ad.active %}
+										<i class="approved">Ativo</i></h4>
+									{% else %}
+										<i class="pending">Pendente ou cancelado</i></h4>
+									{% endif %}
+								<ul class="course_list">
+									<li><strong>Data da publicação</strong> {{ ad.dtCreation|date("d/m/Y") }}</li>
+									<li><strong>Última edição</strong> {{ ad.dtUpdate|date("d/m/Y") }}</li>
+									<li><strong>Categoria</strong>{{ ad.category.name }}</li>
+								</ul>
+								<h6>Descrição</h6> 
+								<p>{{ ad.description }}</p>
+								{% if ad.active %}
+									<ul class="buttons">
+										<li><a href="{{ path('ad_show',{'slug': ad.slug}) }}" target="_blank" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> Ver anúncio</a></li>
+									</ul>
+								{% endif %}
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		{% endif %}
+	  </div>
+	  <!-- /.container-fluid-->
+   	</div>
+{% endblock %}

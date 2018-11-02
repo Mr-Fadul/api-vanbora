@@ -16,15 +16,6 @@ use AppBundle\Entity\Ad;
  * @Route("/anuncio")
  */
 class AdController extends Controller{
-	
-    /**
-     * @Route("/{slug}", name="ad")
-     */
-    public function indexAction(Request $request){
-    	$em = $this->getDoctrine()->getManager();
-
-        return $this->render('AppBundle:Ad:index.html.twig');
-    }
 
     /**
      * Displays a form to create a new Ad entity.
@@ -73,16 +64,17 @@ class AdController extends Controller{
 
             if ($form->isValid()) {
                     try {
-
+                        $entity->setDriver($this->getUser());
+                        $entity->setActive(0);
                         $em->persist($entity);
                         $em->flush();
 
-                        $this->sendEmail('Vanbora - Confirmação de envio de documento', $this->getUser()->getEmail(), '
+                        $this->sendEmail('Vanbora - Confirmação de envio de anúncio', $this->getUser()->getEmail(), '
                             <div style="width: 100%; background: #baebf7; padding: 10px 0;display:block;float:none;margin: 0 auto;">
                             <img src="https://beta.vanbora.today/bundles/app/frontend/img/logo.png" alt="Vanbora" style="width:80px; height:80px;margin: -6px auto;margin-top: -6px;margin-right: auto;margin-bottom: -6px;margin-left: auto;display:block;"/>
                             </div>
                             <div style="width: 39%; background: #fff; padding: 0 60px;display:block;float:none;margin: 0 auto;margin-top:45px;">
-                            <h1 style="color: #020d16; font-weight:500; font-size: 18px;margin: -30px -45px 0 0;text-align:center;font-weight:600;">Seu documento foi enviado com sucesso!</h1>
+                            <h1 style="color: #020d16; font-weight:500; font-size: 18px;margin: -30px -45px 0 0;text-align:center;font-weight:600;">Seu anúncio foi enviado com sucesso!</h1>
                             <p style="color: #666666; font-weight: 400; font-size:16px;margin: 20px 0 0 0;text-align:left;line-height:24px;">Olá, '.$this->getUser()->getFirstName().'.<br><br></p>
                             <p style="color: #666666; font-weight: 400; font-size:13px;margin:0;text-align:left;line-height:24px;">
                             Agora você só precisa aguardar a nossa análise e então seu anúncio será publicado automaticamente.<br><br></p>
@@ -92,15 +84,9 @@ class AdController extends Controller{
                             </div>
                         ');
 
-                        $request->getSession()
-                         ->getFlashBag()
-                         ->add('success', 'Registro criado com sucesso!');
-
                         return $this->redirect($this->generateUrl('dashboard_ads', array('id' => $entity->getId())));
                     } catch (\Exception $e) {
-                        $request->getSession()
-                             ->getFlashBag()
-                         ->add('error', 'Ocorreu algum erro inesperado. Tente novamente mais tarde!');
+                        
                     }
             }
 
@@ -111,6 +97,27 @@ class AdController extends Controller{
         } else {
             throw $this->createNotFoundException('Você não tem permissão para acessar esta tela.');
         }
+    }
+	
+    /**
+     * @Route("/{slug}", name="ad_show")
+     */
+    public function indexAction(Request $request,$slug){
+    	$em = $this->getDoctrine()->getManager();
+
+      $ad = $em->getRepository("AppBundle:Ad")->findOneBySlug($slug);
+
+      if(!$ad){
+        throw $this->createNotFoundException('Anúncio não existe, ou tá desativado.');
+      }
+
+      if (!$ad->getActive() and !$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
+        throw $this->createNotFoundException('Anúncio desativado.'); 
+      }
+
+      $locales = $em->getRepository("AppBundle:WhereISpend")->findByWhere($ad);
+
+      return $this->render('AppBundle:Ad:index.html.twig',array('ad' => $ad, 'locales' => $locales));
     }
 
     /**

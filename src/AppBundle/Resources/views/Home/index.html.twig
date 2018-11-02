@@ -45,30 +45,29 @@
 				<p>Veja os motoristas mais populares</p>
 			</div>
 			<div id="reccomended" class="owl-carousel owl-theme">
-				<div class="item">
-					<div class="box_grid">
-						<figure>
-							<a href="#" class="wish_bt"></a>
-							<a href="#">
-								<div class="preview"><span>Ver</span></div><img src="{{asset('bundles/app/frontend/img/bg_alvorada.jpg')}}" class="img-fluid" alt=""></a>
-							<div class="price">R$39,00</div>
+				{% for ad in ads %}
+					<div class="item">
+						<div class="box_grid">
+							<figure>
+								<a href="{{ path('ad_show',{'slug': ad.slug}) }}">
+									<div class="preview"><span>Ver</span></div><img src="{{asset("uploads/ad/photo/"~ad.photohighlight)}}" class="img-fluid" alt=""></a>
+								<div class="price">{{ ad.price }}</div>
 
-						</figure>
-						<div class="wrapper">
-							<small>Categoria</small>
-							<h3>Carona</h3>
-							<p>Passo pelo bairro Alvorada</p>
-							<div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(6)</small></div>
+							</figure>
+							<div class="wrapper">
+								<small>Categoria</small>
+								<h3>{{ ad.category.name }}</h3>
+								<p>{{ ad.shortdescription }}</p>
+							</div>
+							<ul>
+								<li><a href="{{ path('ad_show',{'slug': ad.slug}) }}">Detalhes</a></li>
+							</ul>
 						</div>
-						<ul>
-							<li><i class="icon_like"></i> 10</li>
-							<li><a href="#">Detalhes</a></li>
-						</ul>
 					</div>
-				</div>
+				{% endfor %}
 			</div>
 			<div class="container">
-				<p class="btn_home_align"><a href="#" class="btn_1 rounded">Ver todas as opções</a></p>
+				<p class="btn_home_align"><a href="{{ path('ads') }}" class="btn_1 rounded">Ver todas as opções</a></p>
 			</div>
 			<hr>
 		</div>
@@ -86,7 +85,6 @@
 								<div class="block-horizzontal"></div>
 								<img src="{{asset("uploads/category/photo/"~category.photo)}}" class="img-fluid" alt="">
 								<div class="info">
-									<small><i class="ti-layers"></i>15 opções</small>
 									<h3>{{ category.name }}</h3>
 								</div>
 							</figure>

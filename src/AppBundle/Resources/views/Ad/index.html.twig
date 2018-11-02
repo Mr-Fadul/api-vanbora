@@ -28,17 +28,14 @@
 						
 						<section id="description">
 							<h2>Descrição</h2>
-							<p>Venham já, tenho várias vagas</p>
+							<p>{{ ad.description }}</p>
 							<h5>Por onde passo?</h5>
 							<ul class="list_ok">
-								<li>
-									<h6>Bairro Alvorada</h6>
-									<p>Passo pelo bairro alvorada</p>
-								</li>
-								<li>
-									<h6>Bairro Eldorado</h6>
-									<p>Passo pelo bairro Eldorado</p>
-								</li>
+								{% for locale in locales %}
+									<li>
+										<h6>{{ locale.neighborhood }}</h6>
+									</li>
+								{% endfor %}
 							</ul>
 						</section>
 						<!-- /section -->
@@ -327,6 +324,13 @@
 						<div class="box_detail">
 							<a href="#0" class="btn_1 full-width">Entre em contato</a>
 							<a href="#0" class="btn_1 full-width outline"><i class="icon_heart"></i> Favorito</a>
+							{% if is_granted("ROLE_SUPER_ADMIN") %}
+								{% if ad.active %}
+                                 	<a href="{{ path('backend_ads_status', { 'id': ad.id }) }}" class="btn_1 full-width outline">Desabilitar</a>
+                                {% else %}
+                                    <a href="{{ path('backend_ads_status', { 'id': ad.id }) }}" class="btn_1 full-width outline">Habilitar</a>
+                                {% endif %}
+							{% endif %}
 							<div id="list_feat">
 								<h3>O que está incluso: </h3>
 								<ul>

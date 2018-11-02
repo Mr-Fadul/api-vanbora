@@ -2132,7 +2132,6 @@ a.box_feat h3 {
 }
 .box_grid ul li:last-child {
   margin-right: 0;
-  float: right;
 }
 .box_grid ul li:last-child a {
   background: #fff;
