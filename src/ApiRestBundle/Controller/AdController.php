@@ -34,7 +34,7 @@ class AdController extends Controller
      * @FOS\Get("/search/{query}", name="api_rest_ad_search", options={"method_prefix" = false, "expose"=true })
      * @FOS\View(statusCode=200, serializerEnableMaxDepthChecks=true, serializerGroups={"listagemUsuario"})
      */
-    public function searchAllAdAction(Request $request,$query)
+    public function searchAdAction(Request $request,$query)
     {
         $service = $this->get('api.service.ad');
         $ad = $service->searchAd($query);
