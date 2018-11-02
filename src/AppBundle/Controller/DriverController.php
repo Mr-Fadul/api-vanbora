@@ -26,11 +26,29 @@ class DriverController extends BaseController{
 
         $categories = $em->getRepository("AppBundle:Category")->findAll();
 
-        $entities = $em->getRepository('AppBundle:Driver')->findByEnabled(1);
+        $drivers = $em->getRepository('AppBundle:Driver')->findByEnabled(1);
 
         return array(
-          'entities' => $entities,
+          'drivers' => $drivers,
           'categories' => $categories
+        );
+    }
+
+    /**
+     * Lists all Drivers entities.
+     *
+     * @Route("/motorista/{id}", name="driver_show")
+     * @Method("GET")
+     * @Template("AppBundle:Home:ads.html.twig")
+     */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $ads = $em->getRepository('AppBundle:Ad')->findByDriver($id);
+
+        return array(
+          'ads' => $ads,
         );
     }
 }

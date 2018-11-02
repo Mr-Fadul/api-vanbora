@@ -9,66 +9,29 @@
 				</div>
 			</div>
 		</section>
-		<!--/hero_in-->
-
-		<div class="filters_listing sticky_horizontal">
-			<div class="container">
-				<ul class="clearfix">
-					<li>
-						<div class="switch-field">
-							<input type="radio" id="all" name="listing_filter" value="all" checked>
-							<label for="all">Todos</label>
-							<input type="radio" id="popular" name="listing_filter" value="popular">
-							<label for="popular">Populares</label>
-							<input type="radio" id="latest" name="listing_filter" value="latest">
-							<label for="latest">Últimos</label>
-						</div>
-					</li>
-					<li>
-						<div class="layout_view">
-							<a href="#0" class="active"><i class="icon-th-list"></i></a>
-						</div>
-					</li>
-					<li>
-						<select name="orderby" class="selectbox">
-							<option value="">Categorias</option>
-							{% for category in categories %}
-								<option value="{{ category.slug }}">{{ category.name }}</option>
-							{% endfor %}
-						</select>
-					</li>
-				</ul>
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /filters -->
 
 		<div class="container margin_60_35">
-			<div class="box_list wow">
-				<div class="row no-gutters">
-					<div class="col-lg-5">
-						<figure class="block-reveal">
-							<div class="block-horizzontal"></div>
-							<a href="course-detail.html"><img src="{{asset('bundles/app/frontend/img/bg_alvorada.jpg')}}" class="img-fluid" alt=""></a>
-							<div class="preview"><span>Ver</span></div>
-						</figure>
-					</div>
-					<div class="col-lg-7">
-						<div class="wrapper">
-							<a href="#0" class="wish_bt"></a>
-							<div class="price">R$39,00</div>
-							<small>Categoria</small>
-							<h3>Carona</h3>
-							<p>Passo pelo bairro Alvorada</p>
-							<div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(6)</small></div>
+			{% for driver in drivers %}
+				<div class="box_list wow">
+					<div class="row no-gutters">
+						<div class="col-lg-5">
+							<figure class="block-reveal">
+								<div class="block-horizzontal"></div>
+								<a href="{{ path('driver_show',{'id': driver.id}) }}"><img src="{{asset("uploads/user/photo/"~driver.photo)}}" class="img-fluid" alt=""></a>
+								<div class="preview"><span>Ver</span></div>
+							</figure>
 						</div>
-						<ul>
-							<li><i class="icon_like"></i> 10</li>
-							<li><a href="#">Detalhes</a></li>
-						</ul>
+						<div class="col-lg-7">
+							<div class="wrapper">
+								<h3>{{ driver.fullName }}</h3>
+							</div>
+							<ul>
+								<li><a href="{{ path('driver_show',{'id': driver.id}) }}">Veja os anúncios</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
-			</div>
+			{% endfor %}
 		</div>
 		<!-- /container -->
 		<div class="bg_color_1">
