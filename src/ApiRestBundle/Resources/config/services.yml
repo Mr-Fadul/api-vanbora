@@ -30,3 +30,9 @@ services:
         parent: api.service.util.servico_base
         calls:
             - [setRepository, [AppBundle:Category]]
+
+    api.service.ad:
+        class: ApiRestBundle\Service\AdService
+        parent: api.service.util.servico_base
+        calls:
+            - [setRepository, [AppBundle:Ad]]

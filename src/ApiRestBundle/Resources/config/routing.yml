@@ -17,3 +17,8 @@ api_rest_category:
     resource: "ApiRestBundle:Category"
     type:     rest
     prefix:   /api/category
+
+api_rest_ad:
+    resource: "ApiRestBundle:Ad"
+    type:     rest
+    prefix:   /api/ad
