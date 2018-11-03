@@ -24,6 +24,7 @@ class AdType extends AbstractType
             ->add('short_description')
             ->add('price')
             ->add('monthly')
+            ->add('payment_online')
             ->add('category', 'entity', array(
                 'label' => 'Categoria',
                 'placeholder' => 'Defina a categoria',

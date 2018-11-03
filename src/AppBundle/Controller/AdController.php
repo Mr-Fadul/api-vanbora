@@ -117,7 +117,7 @@ class AdController extends Controller{
 
       $locales = $em->getRepository("AppBundle:WhereISpend")->findByWhere($ad);
 
-      return $this->render('AppBundle:Ad:index.html.twig',array('ad' => $ad, 'locales' => $locales));
+      return $this->render('AppBundle:Ad:index.html.twig',array('ad' => $ad, 'locales' => $locales, 'user' => $this->getUser()));
     }
 
     /**

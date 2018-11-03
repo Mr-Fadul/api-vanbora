@@ -34,18 +34,25 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-group">
             {{ form_errors(form.price) }}
             <label for="user_photoTemp">Preço</label>
             {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-group">
             {{ form_errors(form.monthly) }}
             <label for="user_photoTemp">Mensal?</label>
             {{ form_widget(form.monthly, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            {{ form_errors(form.payment_online) }}
+            <label for="user_photoTemp">Aceitar pagamentos online?</label>
+            {{ form_widget(form.payment_online, {'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
 </div>

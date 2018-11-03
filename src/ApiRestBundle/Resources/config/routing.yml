@@ -27,3 +27,8 @@ api_rest_ad:
     resource: "ApiRestBundle:Ad"
     type:     rest
     prefix:   /api/ad/search/{query}
+    
+api_rest_ad:
+    resource: "ApiRestBundle:Ad"
+    type:     rest
+    prefix:   /api/ad/category/{id}

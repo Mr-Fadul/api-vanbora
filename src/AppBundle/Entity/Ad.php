@@ -81,6 +81,13 @@ class Ad
     /**
      * @var string
      *
+     * @ORM\Column(name="payment_online", type="boolean")
+     */
+    private $payment_online;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="photo_highlight", type="string", length=255, nullable=true)
      */
     private $photo_highlight;
@@ -314,6 +321,28 @@ class Ad
      */
     public function getActive(){
         return $this->active;
+    }
+
+    /**
+     * Set payment_online
+     *
+     * @param boolean $payment_online
+     *
+     * @return Ad
+     */
+    public function setPaymentOnline($payment_online){
+        $this->payment_online = $payment_online;
+
+        return $this;
+    }
+
+    /**
+     * Get payment_online
+     *
+     * @return boolean
+     */
+    public function getPaymentOnline(){
+        return $this->payment_online;
     }
 
     /**

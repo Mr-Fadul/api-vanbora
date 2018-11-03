@@ -2,6 +2,8 @@
 
 {% block body %}
 	<main>
+		<script src="https://assets.pagar.me/checkout/1.1.0/checkout.js"></script>
+    	<script src="https://assets.pagar.me/pagarme-js/3.0/pagarme.min.js"></script>
 		<section id="hero_in" class="courses">
 			<div class="wrapper">
 				<div class="container">
@@ -331,6 +333,10 @@
                                     <a href="{{ path('backend_ads_status', { 'id': ad.id }) }}" class="btn_1 full-width outline">Habilitar</a>
                                 {% endif %}
 							{% endif %}
+							{% if ad.paymentonline %}
+								<b>*Esse anúncio tem a opção de pagamentos online, pague agora!</b>
+								<div class="btn_1 full-width pay-button">Comprar</div>
+							{% endif %}
 							<div id="list_feat">
 								<h3>O que está incluso: </h3>
 								<ul>
@@ -346,4 +352,89 @@
 		</div>
 		<!-- /bg_color_1 -->
 	</main>
+	{% endblock %}
+	 {% block javascripts %}
+                {{ parent() }}
+                <script type="text/javascript">
+
+                    $('.pay-button').click(function () {
+                        plantype = parseInt($(this).data('plantype'));
+
+                        // total de vezes em que o plano pode ser pago
+                        installments = parseInt($(this).data('planinstallments'));
+
+                        value = parseInt($(this).data('price'));
+
+                        var checkout = new PagarMeCheckout.Checkout({
+                            encryption_key: 'ek_test_faSxiQqhzFQfJJbeuhvR5yPLasxfz1',
+                            success: function (data) {
+                                $.post(Routing.generate('aluno_assinatura_buy'), {
+                                    "transaction": data,
+                                    "planType": plantype
+                                }, function (data) {
+                                    if (data.responseCode == 200) {
+                                        swal("Assinatura concluÃ­da!", "Assinatura efetuada com sucesso", "success").then(function () {
+                                            var url = Routing.generate('aluno_assinatura_success');
+                                            window.location.href = url + "?token=" + data.payment;
+                                        });
+                                    } else {}
+                                })
+                            },
+                            error: function (err) {
+                                console.log("Error");
+                                console.log(err);
+                            },
+                            close: function () {
+                                console.log('The modal has been closed.');
+                            }
+                        });
+
+                        checkout.open({
+                            amount: value,
+                            buttonText: 'Pagar',
+                            buttonClass: 'botao-pagamento',
+                            customerData: 'false',
+                            createToken: 'true',
+                            paymentMethods: 'credit_card,boleto',
+                            maxInstallments: installments,
+                            capture: true,
+                            customer: {
+                                external_id: '{{ user.id }}',
+                                name: "{{ user.firstName ~ ' ' ~ user.lastName }}",
+                                type: 'individual',
+                                country: 'br',
+                                email: "{{ user.email }}",
+                                documents: [
+                                    {
+                                        type: 'cpf',
+                                        number: "{{ user.cpf }}"
+                                    }
+                                ],
+                                phone_numbers: ["+5531999999999"],
+                                birthday: "{{ user.DtNascimento|date('Y-m-d') }}"
+                            },
+                            billing: {
+                                name: "{{ user.firstName ~ ' ' ~ user.lastName }}",
+                                address: {
+                                    country: "br",
+                                    state: "{{ user.uf }}",
+                                    city: "{{ user.cidade }}",
+                                    neighborhood: "{{ user.bairro }}",
+                                    street: "{{ user.endereco }}",
+                                    street_number: "{{ user.numero }}",
+                                    zipcode: "{{ user.cep }}"
+                                }
+                            },
+                            items: [
+                                {
+                                    id: "r123",
+                                    title: "Compra",
+                                    unit_price: value,
+                                    quantity: 1,
+                                    tangible: false
+                                }
+                            ]
+                        });
+                    });
+                </script>
 {% endblock %}

@@ -102,6 +102,69 @@ class User extends BaseUser implements UserInterface
      */
     protected $facebookId;
 
+    /**
+     * @var \Date
+     *
+     * @ORM\Column(name="dt_nascimento", type="date", nullable=true)
+     */
+    private $dtNascimento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cpf", type="string", length=14, nullable=true)
+     */
+    private $cpf;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cep", type="string", length=9, nullable=true)
+     */
+    private $cep;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="endereco", type="string", length=500, nullable=true)
+     */
+    private $endereco;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero", type="string", length=10, nullable=true)
+     */
+    private $numero;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="complemento", type="string", length=200, nullable=true)
+     */
+    private $complemento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="bairro", type="string", length=500, nullable=true)
+     */
+    private $bairro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cidade", type="string", length=500, nullable=true)
+     */
+    private $cidade;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="uf", type="string", length=2, nullable=true)
+     */
+    private $uf;
+
     public function __construct()
     {
         parent::__construct();
@@ -449,6 +512,221 @@ class User extends BaseUser implements UserInterface
     public function getFacebookId()
     {
         return $this->facebookId;
+    }
+
+    /**
+     * Set dtNascimento
+     *
+     * @param \Date $dtNascimento
+     *
+     * @return Usuario
+     */
+    public function setDtNascimento($dtNascimento)
+    {
+        $this->dtNascimento = $dtNascimento;
+
+        return $this;
+    }
+
+    /**
+     * Get dtNascimento
+     *
+     * @return \Date
+     */
+    public function getDtNascimento()
+    {
+        return $this->dtNascimento;
+    }
+
+    /**
+     * Set cpf
+     *
+     * @param string $cpf
+     * @return Usuario
+     */
+    public function setCpf($cpf)
+    {
+        $this->cpf = $cpf;
+
+        return $this;
+    }
+
+    /**
+     * Get cpf
+     *
+     * @return string
+     */
+    public function getCpf()
+    {
+        return $this->cpf;
+    }
+
+     /**
+     * Set cep
+     *
+     * @param string $cep
+     *
+     * @return Usuario
+     */
+    public function setCep($cep)
+    {
+        $this->cep = $cep;
+
+        return $this;
+    }
+
+    /**
+     * Get cep
+     *
+     * @return string
+     */
+    public function getCep()
+    {
+        return $this->cep;
+    }
+
+    /**
+     * Set endereco
+     *
+     * @param string $endereco
+     *
+     * @return Usuario
+     */
+    public function setEndereco($endereco)
+    {
+        $this->endereco = $endereco;
+
+        return $this;
+    }
+
+    /**
+     * Get endereco
+     *
+     * @return string
+     */
+    public function getEndereco()
+    {
+        return $this->endereco;
+    }
+
+    /**
+     * Set numero
+     *
+     * @param string $numero
+     *
+     * @return Usuario
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    /**
+     * Get numero
+     *
+     * @return string
+     */
+    public function getNumero()
+    {
+        return $this->numero;
+    }
+
+    /**
+     * Set complemento
+     *
+     * @param string $complemento
+     *
+     * @return Usuario
+     */
+    public function setComplemento($complemento)
+    {
+        $this->complemento = $complemento;
+
+        return $this;
+    }
+
+    /**
+     * Get complemento
+     *
+     * @return string
+     */
+    public function getComplemento()
+    {
+        return $this->complemento;
+    }
+
+    /**
+     * Set bairro
+     *
+     * @param string $bairro
+     *
+     * @return Usuario
+     */
+    public function setBairro($bairro)
+    {
+        $this->bairro = $bairro;
+
+        return $this;
+    }
+
+    /**
+     * Get bairro
+     *
+     * @return string
+     */
+    public function getBairro()
+    {
+        return $this->bairro;
+    }
+
+    /**
+     * Set cidade
+     *
+     * @param string $cidade
+     *
+     * @return Usuario
+     */
+    public function setCidade($cidade)
+    {
+        $this->cidade = $cidade;
+
+        return $this;
+    }
+
+    /**
+     * Get cidade
+     *
+     * @return string
+     */
+    public function getCidade()
+    {
+        return $this->cidade;
+    }
+
+    /**
+     * Set uf
+     *
+     * @param string $uf
+     *
+     * @return Usuario
+     */
+    public function setUf($uf)
+    {
+        $this->uf = $uf;
+
+        return $this;
+    }
+
+    /**
+     * Get uf
+     *
+     * @return string
+     */
+    public function getUf()
+    {
+        return $this->uf;
     }
 
     /**

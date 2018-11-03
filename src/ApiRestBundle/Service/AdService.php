@@ -21,5 +21,12 @@ class AdService extends BaseService{
 
         return $ad;
     }
+    
+    public function searchAdByCategory($id){
+        $ad = $this->repository->findByCategory($id);
+
+        return $ad;
+    }
+    
 
 }
