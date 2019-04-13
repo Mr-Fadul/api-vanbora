@@ -19,11 +19,12 @@ class UserController extends Controller
      * @FOS\Get("/list", name="api_rest_user", options={"method_prefix" = false, "expose"=true })
      * @FOS\View(statusCode=200, serializerEnableMaxDepthChecks=true, serializerGroups={"listagemUsuario"})
      */
+    //lista todos os usuarios 
     public function searchAllUsersAction(Request $request)
     {
         $service = $this->get('api.service.usuario');
         $user = $service->searchAllUser();
-
+        //retorna um array json 
         $serializer = SerializerBuilder::create()->build();
         $return = $serializer->serialize($user, 'json');
         return new Response($return, 200, array('Content-Type' => 'application/json'));
