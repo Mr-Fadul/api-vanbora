@@ -24,6 +24,7 @@ class DriverController extends BaseController{
      * @Method("GET")
      * @Template()
      */
+    //autentica a conexão a api
     public function indexAction()
     {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
@@ -45,6 +46,7 @@ class DriverController extends BaseController{
      * @Method("POST")
      * @Template("AppBundle:Backend\Driver:new.html.twig")
      */
+    //cadastra um novo motorista
     public function createAction(Request $request)
     {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
@@ -68,7 +70,7 @@ class DriverController extends BaseController{
 
                         $em->persist($entity);
                         $em->flush();
-
+                        //Html da mensagem de confirmação de cadastro 
                         $this->sendEmail('Vanbora - Bem vindo ao Vanbora', $email, '
                             <div style="width: 100%; background: #baebf7; padding: 10px 0;display:block;float:none;margin: 0 auto;">
                             <img src="https://beta.vanbora.today/bundles/app/frontend/img/logo.png" alt="Vanbora" style="width:80px; height:80px;margin: -6px auto;margin-top: -6px;margin-right: auto;margin-bottom: -6px;margin-left: auto;display:block;"/>
