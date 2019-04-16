@@ -19,6 +19,7 @@ class DriverController extends Controller
      * @FOS\Get("/list", name="api_rest_driver", options={"method_prefix" = false, "expose"=true })
      * @FOS\View(statusCode=200, serializerEnableMaxDepthChecks=true, serializerGroups={"listagemUsuario"})
      */
+    //busca todos os motoristas e lista na front
     public function searchAllDriverAction(Request $request)
     {
         $service = $this->get('api.service.driver');

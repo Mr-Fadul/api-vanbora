@@ -20,6 +20,7 @@ class DriverController extends BaseController{
      * @Method("GET")
      * @Template("AppBundle:Driver:index.html.twig")
      */
+    //lista motoristas por categoria
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -41,6 +42,7 @@ class DriverController extends BaseController{
      * @Method("GET")
      * @Template("AppBundle:Home:ads.html.twig")
      */
+    //lista motorista por id
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();

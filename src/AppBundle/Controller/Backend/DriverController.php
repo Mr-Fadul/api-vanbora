@@ -50,10 +50,13 @@ class DriverController extends BaseController{
     public function createAction(Request $request)
     {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
+            //instancia o objeto
             $entity = new Driver();
+            //recebe os parametros do formulario
             $form = $this->createCreateForm($entity);
+            //preenche o formulario com os dados recebidos do front
             $form->handleRequest($request);
-
+            //valida o email
             if ($form->isValid()) {
                 if ($this->validUsernameEmail($entity)) {
                     try {
@@ -70,7 +73,7 @@ class DriverController extends BaseController{
 
                         $em->persist($entity);
                         $em->flush();
-                        //Html da mensagem de confirmação de cadastro 
+                        //Html da mensagem de confirmação de cadastro que é enviado por email
                         $this->sendEmail('Vanbora - Bem vindo ao Vanbora', $email, '
                             <div style="width: 100%; background: #baebf7; padding: 10px 0;display:block;float:none;margin: 0 auto;">
                             <img src="https://beta.vanbora.today/bundles/app/frontend/img/logo.png" alt="Vanbora" style="width:80px; height:80px;margin: -6px auto;margin-top: -6px;margin-right: auto;margin-bottom: -6px;margin-left: auto;display:block;"/>
@@ -85,12 +88,13 @@ class DriverController extends BaseController{
 
                             </div>
                           ');
-
+                        //pega a sessão uma sessão
                         $request->getSession()
                    ->getFlashBag()
                    ->add('success', 'Registro criado com sucesso!');
-
+                          //redireciona para home do motorista logado e armazena o id
                         return $this->redirect($this->generateUrl('backend_driver', array('id' => $entity->getId())));
+                        //tratamento de exeções
                     } catch (\Exception $e) {
                         $request->getSession()
                 ->getFlashBag()
@@ -102,7 +106,7 @@ class DriverController extends BaseController{
                     ->add('error', 'Email já cadastrado, tente novamente!');
                 }
             }
-
+            //retorna na view 
             return array(
             'entity' => $entity,
             'form'   => $form->createView(),
@@ -119,6 +123,7 @@ class DriverController extends BaseController{
      *
      * @return \Symfony\Component\Form\Form The form
      */
+    //instancia o formulario do tipo motorista para ser chamado nas funções
     private function createCreateForm(Driver $entity)
     {
         $form = $this->createForm(new DriverType(), $entity, array(
@@ -138,6 +143,7 @@ class DriverController extends BaseController{
      * @Method("GET")
      * @Template()
      */
+    //Cria o formulario para cadastro do novo motorista e exibe no front end
     public function newAction()
     {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
@@ -160,17 +166,18 @@ class DriverController extends BaseController{
      * @Method("GET")
      * @Template()
      */
+    //exibe o formulario preenchido para editar dados de um motorista cadastrado
     public function editAction($id)
     {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
             $em = $this->getDoctrine()->getManager();
-
+               //recebe o id do motorista
             $entity = $em->getRepository('AppBundle:Driver')->find($id);
-
+            //se n existir retorna o erro
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Driver entity.');
             }
-
+            //sem erro preenche o form e exibem no front
             $editForm = $this->createEditForm($entity);
             return array(
             'entity'      => $entity,
@@ -188,6 +195,7 @@ class DriverController extends BaseController{
     *
     * @return \Symfony\Component\Form\Form The form
     */
+    //instancia o formulario para edição dos dados do motorista 
     private function createEditForm(Driver $entity)
     {
         $form = $this->createForm(new DriverType(), $entity, array(
@@ -206,6 +214,7 @@ class DriverController extends BaseController{
      * @Method("PUT")
      * @Template("AppBundle:Driver:edit.html.twig")
      */
+    //editar dados do motorista por id
     public function updateAction(Request $request, $id)
     {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
@@ -255,6 +264,7 @@ class DriverController extends BaseController{
      * @Route("/{id}/delete", name="backend_driver_delete")
      *
      */
+    //deletar um motorista do bd
     public function deleteAction(Request $request, $id)
     {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
@@ -279,6 +289,7 @@ class DriverController extends BaseController{
     *
     * @Route("/?id={id}", name="backend_driver_status")
     */
+    
     public function activateStatusAction($id)
     {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
@@ -336,7 +347,7 @@ class DriverController extends BaseController{
 
         return $flag;
     }
-
+    //metodo de enviar emails 
     private function sendEmail($titulo, $email, $message)
     {
         $mailMessage = \Swift_Message::newInstance()
