@@ -265,19 +265,22 @@ class DriverController extends BaseController{
      *
      */
     //deletar um motorista do bd
+    //recebe o id por parametro
     public function deleteAction(Request $request, $id)
     {
+        //autentica na api
         if ($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
             $em = $this->getDoctrine()->getManager();
+            //busca o ID a ser deletado no BD
             $entity = $em->getRepository('AppBundle:Driver')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Driver entity.');
             }
-
+            //remove o objeto 
             $em->remove($entity);
             $em->flush();
-
+             //retorna a pagia 
             return $this->redirect($this->generateUrl('backend_driver'));
         } else {
             throw $this->createNotFoundException('Você não tem permissão para acessar esta tela.');
